@@ -2,7 +2,9 @@
 package Server;
 
 import Client.Client;
+import Client.TestClient;
 import java.net.ServerSocket;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,32 +12,33 @@ public class TestRun {
      public static void main(String[] args) throws Exception {
 
             Thread createServer = new Thread( () -> {
-                Server server = new Server(5);
+                Server server = new Server(3);
+                Scanner scIN = new Scanner(System.in);
                 String IP = server.getIP();
                 System.out.println(IP);
                 int PORT = server.getPORT();
                 System.out.println(PORT);
                 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(TestRun.class.getName()).log(Level.SEVERE, null, ex);
+                /*try {
+
+                    scIN.nextLine();
+                    
+                } catch (Exception ex) {
+                    System.out.println("asdasd");
                 }
                 
                 server.startGame();
+                */
+                
+               /* for(String name : server.getPlayers()){
+                    System.out.println(name) ;
+                }*/
+                
             });
             
             createServer.start();
-            System.out.println("asd");
             
-            int PORT = 12345;
-            
-            Client c1 = new Client(PORT , "localhost");
-            Client c2 = new Client(PORT , "localhost");
-            Client c3 = new Client(PORT , "localhost");
-            Client c4 = new Client(PORT , "localhost");
-            Client c5 = new Client(PORT , "localhost");
-            
-            
+            createServer.join();
+                    
     }
 }

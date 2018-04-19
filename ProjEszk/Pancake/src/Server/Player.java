@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Player {
     static int playerNo = 0;
     private String name;
-    private int score;
+    private int points;
     private Socket s;
     private Scanner sc;
     private PrintWriter pw;
@@ -26,6 +26,8 @@ public class Player {
         
         if(sc.hasNextLine()){
             this.name = sc.nextLine();
+            pw.println("Welcome!");
+            pw.flush();
         }else{
             ++playerNo;
             this.name = "Player"+playerNo;
@@ -33,22 +35,35 @@ public class Player {
     
     }
     
-    public void sendQuestion( String question){
+    public void sendQuestion( int questionID){
         if(!s.isClosed()){
             try {
-                pw.println(question);
+                pw.println(questionID); // question = "Q123" 
+                pw.flush();
             } catch (Exception e) {
                 System.err.println("Error at sending question: " + e.toString());
             }  
         }
     }
     
-    public void statusChange(String status){ // endOfRound, endOfGame
+    public void sendStatus(int status){ // endOfRound, endOfGame
         if(!s.isClosed()){
             try {
-                pw.println(status);
+                pw.println("S" + status); // status = "S1"
+                pw.flush();
             } catch (Exception e) {
                 System.err.println("Error at sending statusChange: " + e.toString());
+            }  
+        }
+    }
+    
+    public void sendPoints(String points){ // endOfRound, endOfGame
+        if(!s.isClosed()){
+            try {
+                pw.println(points); // status = "S1"
+                pw.flush();
+            } catch (Exception e) {
+                System.err.println("Error at sending pointse: " + e.toString());
             }  
         }
     }
@@ -64,6 +79,18 @@ public class Player {
             }
         }
         return 0;
+    }
+    
+    public String getPlayerName(){
+        return this.name;
+    }
+    
+    public void addPoint(){
+        ++this.points;
+    }
+    
+    public int getPoints(){
+        return this.points;
     }
     
 }
