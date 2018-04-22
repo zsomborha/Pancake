@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Client.Client;
+import GameLogic.GameLogic;
 import java.awt.Toolkit;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -25,34 +27,45 @@ public class Modell {
     private int kerdesSorszam = 1;
     int round;
     Result result;
+    Client client;
+    GameLogic gameLogic;
+  
     
-    public static void main(String[] args){
-                        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Modell(5);
-            }
-        });
-        
-        
-    }
-    
-    public Modell(int round){
-        this.round=round;
+
+
+    public Modell(GameLogic aThis) {
+       
         System.out.println("Modell start");
         l= new login();
         l.setSize(1130, 710);
         l.setModell(this);
-  
+        gameLogic=aThis;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
 
-    void startNewGame(String playerName) {
+    void startNewGame(String playerName, String ip, String port) {
         if (playerName.isEmpty()){
             l.sendUserMessage();
             return;
         }
+        try{
+            Integer.parseInt(port);
+        }catch(Exception e){
+            l.sendUserPortMessage();
+            return;
+        }
+        
+        if (ip.isEmpty()){
+            l.sendUserIpMessage();
+            return;
+        }
+        
+        
         //TODO CLIENT STARTNEWGAME
+        
+        gameLogic.startCommunication(playerName,ip,port);
         l.dispose();
         System.out.println("startNewGame");
         waiting = new Waiting();
@@ -63,10 +76,11 @@ public class Modell {
     }
     
     
-    void GamePanelCreate(){
+    public void GamePanelCreate(int round){
+        this.round=round;
         waiting.dispose();
-        //String[] question = client.getQuestion();
-        String[] question = {"elso kerdes","A","B","C","D"};
+        String[] question = gameLogic.getQuestion();
+        //String[] question = {"elso kerdes","A","B","C","D"};
         gamePanel = new GamePanel(round,playerName,question[0],question[1],question[2],question[3],question[4]);
         gamePanel.setSize(1130, 710);
         gamePanel.setModell(this);
@@ -83,19 +97,17 @@ public class Modell {
 
     void seAnswer(String answer) {
         //client.sendAnswer(answer)
-        //String[] question = client.getQuestion();
-        String[] question = {"x kerdes","Aa","Ba","Ca","Da"};
-        gamePanel.setNewQuestion(question[0],question[1],question[2],question[3],question[4]);
-        gamePanel.setKerdesSorszam(++kerdesSorszam,round);
-        if(kerdesSorszam>round){
-            gamePanel.playEndMessage();
-            gamePanel.dispose();
-            result = new Result(playerName);
-            result.setSize(1130, 710);
-            result.setModell(this);
-            String[][] results = { {"player1","5"},{"player2","13"},{"player3","3"}  };
-            setResults(results);
+        gameLogic.sendAnswer(answer);
+        if (kerdesSorszam<round){
+           String[] question = gameLogic.getQuestion();
+           gamePanel.setNewQuestion(question[0],question[1],question[2],question[3],question[4]);
+           gamePanel.setKerdesSorszam(++kerdesSorszam,round);
+        }else{
+           gamePanel.playEndMessage();
+           String[][] results= gameLogic.getResult();
+           setResults(results);
         }
+        
     }
     
     void setResults(String[][] results){
@@ -107,6 +119,7 @@ public class Modell {
             }
         }
         result.setWinner(winner);
+        GameLogic.closeconnection();
     }
 
     void startGameDescrition() {
@@ -120,6 +133,13 @@ public class Modell {
         }
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void newPlayer() {
+        waiting.newPlayer();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
     
  
     
