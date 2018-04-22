@@ -1,6 +1,6 @@
 # Pancake
 
-# Database setup
+## Database setup
 
 Download a GlassFish application:
 https://glassfish.java.net/download.html (Java EE X Full Platform)
