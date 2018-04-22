@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Hartmann Zsombor
@@ -16,18 +20,23 @@ public class GamePanel extends javax.swing.JFrame {
      */
     Modell modell;
 
-    GamePanel(String playerName, String kerdes, String valasz1, String valasz2, String valasz3, String valasz4) {
+    GamePanel(int round,String playerName, String kerdes, String valasz1, String valasz2, String valasz3, String valasz4) {
         initComponents();
-        jLabel1.setText("A kérdés sorszáma: 1");
+        
+        jLabel1.setText("A kérdés sorszáma: 1/"+Integer.toString(round));
         jLabel3.setText("Üdvözöljük "+playerName+"!");
        // String kerdes = client.getNewQuestion();
+       setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("frameIcon.png")));
        jLabel2.setText(kerdes);
        jToggleButton1.setText(valasz1);
        jToggleButton2.setText(valasz2);
        jToggleButton3.setText(valasz3);
        jToggleButton4.setText(valasz4);
+        
+        setSize(1130, 710);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setVisible(true);
-       
         
     }
 
@@ -47,8 +56,12 @@ public class GamePanel extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jToggleButton1.setText("jToggleButton1");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +69,8 @@ public class GamePanel extends javax.swing.JFrame {
                 jToggleButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jToggleButton1);
+        jToggleButton1.setBounds(530, 430, 119, 25);
 
         jToggleButton2.setText("jToggleButton2");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +78,8 @@ public class GamePanel extends javax.swing.JFrame {
                 jToggleButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jToggleButton2);
+        jToggleButton2.setBounds(530, 540, 119, 25);
 
         jToggleButton3.setText("jToggleButton3");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +87,8 @@ public class GamePanel extends javax.swing.JFrame {
                 jToggleButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jToggleButton3);
+        jToggleButton3.setBounds(800, 430, 119, 25);
 
         jToggleButton4.setText("jToggleButton4");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -77,58 +96,35 @@ public class GamePanel extends javax.swing.JFrame {
                 jToggleButton4ActionPerformed(evt);
             }
         });
+        getContentPane().add(jToggleButton4);
+        jToggleButton4.setBounds(800, 540, 119, 25);
 
         jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(80, 130, 370, 50);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 51, 0));
         jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(320, 280, 790, 80);
 
         jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(80, 50, 380, 50);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jToggleButton1)
-                                    .addComponent(jToggleButton3))
-                                .addGap(174, 174, 174)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jToggleButton4)
-                                    .addComponent(jToggleButton2)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addContainerGap(267, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(92, 92, 92)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2))
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton3)
-                    .addComponent(jToggleButton4))
-                .addGap(71, 71, 71))
-        );
+        jButton1.setText("játékleírás");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(350, 610, 91, 25);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 1130, 710);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,6 +149,11 @@ public class GamePanel extends javax.swing.JFrame {
         // TODO add your handling code here:
         modell.seAnswer(jToggleButton4.getText().toString());
     }//GEN-LAST:event_jToggleButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        modell.startGameDescrition();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,9 +191,11 @@ public class GamePanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
@@ -213,8 +216,13 @@ public class GamePanel extends javax.swing.JFrame {
     }
     
     
-    void setKerdesSorszam(int n){
-        jLabel1.setText("A kérdés sorszáma: "+Integer.toString(n));
+    void setKerdesSorszam(int n,int round){
+        jLabel1.setText("A kérdés sorszáma: "+Integer.toString(n)+"/"+Integer.toString(round));
+    }
+
+    void playEndMessage() {
+        JOptionPane.showMessageDialog(this, "A játék véget ért, lássuk az eredményeket!");
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
