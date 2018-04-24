@@ -14,16 +14,24 @@ public class Player {
     private String name;
     private int points = 0;
     
-    Player(String name){
+    public Player(String name){
         this.name = name;
     }
     
     public void AddPoint(){
-        points++;
+        ++points;
     }
     
     public String GetName(){
         return name;
+    }
+    
+    public void setName(String name){
+        this.name = name;
+    }
+    
+    public void setPoints(int points){
+        this.points = points;
     }
     
     public int GetPoints(){

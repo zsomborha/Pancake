@@ -10,22 +10,39 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server {
+    private int PORT = 0;
     private ServerSocket ss;
     private int rounds;
+    private int timePerQuestion = 10;
     private final int maxClients = 4;
     private boolean gameStart = false;
     private Thread joining;
-    public ArrayList<Player> players = new ArrayList<Player>();
+    public ArrayList<User> players = new ArrayList<User>();
     
-    public Server(int rounds){
+    public Server(int PORT,int rounds, int tpq){
+        this.PORT = PORT;
         this.rounds = rounds;
+        this.timePerQuestion = tpq;
         try {
-            ss = new ServerSocket(0);
+            ss = new ServerSocket(PORT);
         } catch (IOException ex) {
             System.err.println("Error at creating server: " + ex.toString());
         }
-         
-        startServer();
+        
+        Thread start = new Thread( () -> {
+            synchronized(players){
+                startServer();
+            }
+        } );
+        
+        start.start();
+        
+        try {
+            start.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public String getIP(){
@@ -47,7 +64,7 @@ public class Server {
     }
     
     public void startGame(){
-        joining.interrupt();
+        joining.stop();
         try {
             voidSocket();
         } catch (IOException ex) {
@@ -71,7 +88,7 @@ public class Server {
         for(int i = 0; i < rounds; ++i){
             
             //round start
-            for(Player p : players){
+            for(User p : players){
                 p.sendStatus(1);
                 System.out.println(p.getPlayerName() + " S1 "); 
            }
@@ -80,36 +97,25 @@ public class Server {
             int  n = random.nextInt(50) + 1;
             int questionID = n;
             
-            for(Player p : players){
+            for(User p : players){
                 p.sendQuestion(questionID);
             }
             ////////////////////////////
-            Thread.sleep(2000);
+            Thread.sleep(timePerQuestion * 1000);
             ////////////////////////////
             //round end
-            for(Player p : players){
+            for(User p : players){
                 p.sendStatus(2);
                 int answer = p.receiveAnswer();
-                
-                System.out.println(p.getPlayerName() + " : " + answer);
-                
-                Thread.sleep(100);
-                
-                if(answer == 100 /*question.answer*/ ){
+                if(answer == 2 /*question.answer*/ ){
                     p.addPoint();
                 }
             }   
         }
         
-        String points = "";
-        for(Player p : players){
-            points = points + " ; " + p.getPlayerName() + " : " + p.getPoints();
-        }
-        
-        for(Player p : players){
+        for(User p : players){
                 p.sendStatus(3);
-                Thread.sleep(100);
-                p.sendPoints(points);
+                p.sendPlayers(playersToString());
         }
         
     }
@@ -127,6 +133,10 @@ public class Server {
                     try{
                         clientJoin();
                         System.out.println("Client connected: " + players.get(players.size()-1).getPlayerName());
+                        
+                        for(User p : players){
+                            p.sendPlayers(playersToString());
+                        }
                     }catch (Exception e){
                         System.err.println("Error at client connecting: " + e.toString());
                     };
@@ -143,7 +153,6 @@ public class Server {
         
         try{
             joining.start();
-            
         }catch(Exception e){
             System.err.println("Error at client joining: " + e.toString());
         }
@@ -151,7 +160,7 @@ public class Server {
     }
     
     private void clientJoin(){
-        this.players.add(new Player(ss));
+        this.players.add(new User(ss));
     }
     
     private void voidSocket() throws IOException{
@@ -160,10 +169,19 @@ public class Server {
     
     public ArrayList<String> getPlayers(){
         ArrayList<String> result = new ArrayList<>(); 
-        for(Player p : players){
+        for(User p : players){
             result.add(p.getPlayerName());
         }
         
         return result;
+    }
+    
+    public String playersToString(){
+        String result = ""; 
+        for(User p : players){
+            result = result + p.getPlayerName() + ":" + p.getPoints() + ";";
+        }
+        
+        return(result.substring(0, result.length() - 1));
     }
 }

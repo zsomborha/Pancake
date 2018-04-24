@@ -1,16 +1,21 @@
 package Client;
 
+import GameLogic.Player;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
+    public ArrayList<Player> players = new ArrayList<>();
     private Socket s;
     private Scanner sc;
     private PrintWriter pw;
     private String msg = "";
     private Scanner scIn;
     private int status = 0; //0-lobby 1-kérdés 2-kérdés vége 3-játék vége
+    private int questionID;
+    private int selectedAnswer = 4; //4-if not selected anything
     
     public Client(int PORT, String IP, String name){
         try {
@@ -59,45 +64,92 @@ public class Client {
     
     private void receiveMSG(){
         while(!s.isClosed() && status < 3){
-                        try{
-                            String incomingMSG= "0";
-                            if(sc.hasNextLine()){
-                                incomingMSG = sc.nextLine();
-                            }
-                            if(!incomingMSG.equals("")){
-                                System.out.println(incomingMSG);
+                    try{
+                        String incomingMSG= "";
+                        if(sc.hasNextLine()){
+                            incomingMSG = sc.nextLine();
+                        }
                             
-                            
-                            //status mod
-                            if(incomingMSG.charAt(0) == 'S'){
+                        if(!incomingMSG.equals("")){
+                            if(incomingMSG.charAt(0) == 'N'){ //new Client
+                                String playersString = sc.nextLine();
+                                
+                                playersToArray(playersString);
+                                
+                                //GameLogic.GameLogic.statusZero();//status 0
+                                TestClient.statusZero();
+                                
+                            }else
+                            if(incomingMSG.charAt(0) == 'S'){ //Status change
                                 if(         incomingMSG.charAt(1) == '1'){//question ID  incoming
+                                    this.status = 1;
+                                    //GameLogic.GameLogic.statusOne();//status 1
+                                    TestClient.statusOne();
+                                    
                                     int questionID = sc.nextInt();
-                                    //getQuestion(questionID)
-                                    status = 0;
-                                    System.out.println("QID: " +questionID );
+                                    //TODO getQuestion(questionID)
+                                    this.questionID = questionID;
                                     
                                 }else if(   incomingMSG.charAt(1) == '2'){//time is up, send answer
                                     
-                                    //getSelectedAnswer()
-                                    //if(selectedAnswer() != 0)
-                                    status = 2;
-                                    pw.println("100");
+                                    this.status = 2;
+                                    //GameLogic.GameLogic.statusTwo();//status 2
+                                    TestClient.statusTwo();
+                                    
+                                    pw.println(selectedAnswer);
                                     pw.flush();
+                                    this.selectedAnswer = 4;
                                     
                                 }else if(   incomingMSG.charAt(1) == '3'){//game over
-                                    status = 3;
-                                    String points = sc.nextLine();
-                                    System.out.println(points);
                                     
+                                    this.status = 3;
+                                    
+                                    
+                                    
+                                    sc.nextLine();
+                                    String playersString = sc.nextLine();
+                                    playersToArray(playersString);
+                                    
+                                    //GameLogic.GameLogic.statusThree();//status 3
+                                    TestClient.statusThree();
                                 }
                             }
                             }
                             //question ID
                         }catch(Exception e){
-                            System.out.println("Disconnected " + e.toString());
+                            System.err.println("Error in client! : " + e.toString());
                     }
                 }
     }
+        
+    public void setSelectedAnswer(int sa){
+        this.selectedAnswer = sa;
+    }
     
+    public int getQuestionID(){
+        return this.questionID;
+    }
+    
+    public int getStatus(){
+        return this.status;
+    }
+    
+    public ArrayList<Player> getPlayers(){
+        return this.players;
+    }
+    
+    private ArrayList<Player> playersToArray(String input){
+        this.players.clear();
+        String[] temp = input.split(";");
+        //ArrayList<Player> result = new ArrayList<Player>();
+        
+        for(int i = 0; i < temp.length; ++i){
+            String[] p = temp[i].split(":");
+            players.add(new Player(p[0]) );
+            players.get(i).setPoints( Integer.parseInt(p[1]) );
+        }
+        
+        return(players);
+    }
     
 }
