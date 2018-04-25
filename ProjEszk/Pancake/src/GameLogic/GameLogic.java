@@ -6,8 +6,12 @@
 package GameLogic;
 
 import Client.Client;
+import Database.DataSource;
+import Database.Entities.Question;
 import GUI.Modell;
 import Server.Server;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -23,8 +27,16 @@ public class GameLogic {
     Modell modell;
     Client client;
     
-    public GameLogic(){
+    public static void main(String[] args) throws Exception{ GameLogic g = new GameLogic();}
+    
+    public GameLogic() throws Exception{
         modell = new Modell(this);
+        /*
+        List<Question> list;
+        list = DataSource.getInstance().getQuestionController().getEntities();
+        list.get(1).getQuestionString();
+        */
+        
 
     }
     
@@ -43,22 +55,30 @@ public class GameLogic {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void allClientsReady(int round){
+    public void allClientsReady(int round) throws SQLException{
         modell.GamePanelCreate(round);
     }
     
 
 
-    public String[] getQuestion() {
-        //int QuestionId = client.getQuestionId;
-        //TODO ADATBÁZISBÓL LEKÉRNI A KÉRDÉST
-        String[] question = {"Mi a helyes valasz?", "Egy", "ketto", "harom", "negy"};
-        return question;
+    public String[] getQuestion() throws SQLException {
+
+        int index = client.getQuestionID();
+        Question myQuestion = DataSource.getInstance().getQuestionController().getEntityById(index);
+        List<String> answers = myQuestion.getAnswers();
+        
+        
+        //String[] questionWithAnswers = {"Mi a helyes valasz?", "Egy", "ketto", "harom", "negy"};
+        String[] questionWithAnswers = {myQuestion.getQuestionString(), answers.get(0), answers.get(1), answers.get(2), answers.get(3)};
+        
+        return questionWithAnswers;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void sendAnswer(String answer) {
           //client.sendAnswer(answer);
+          
+          
         
     }
     
