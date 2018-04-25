@@ -8,6 +8,7 @@ package GUI;
 import Client.Client;
 import GameLogic.GameLogic;
 import java.awt.Toolkit;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,7 +77,7 @@ public class Modell {
     }
     
     
-    public void GamePanelCreate(int round){
+    public void GamePanelCreate(int round) throws SQLException{
         this.round=round;
         waiting.dispose();
         String[] question = gameLogic.getQuestion();
@@ -99,8 +100,14 @@ public class Modell {
         //client.sendAnswer(answer)
         gameLogic.sendAnswer(answer);
         if (kerdesSorszam<round){
-           String[] question = gameLogic.getQuestion();
-           gamePanel.setNewQuestion(question[0],question[1],question[2],question[3],question[4]);
+           String[] question;
+            try {
+                question = gameLogic.getQuestion();
+                gamePanel.setNewQuestion(question[0],question[1],question[2],question[3],question[4]);
+            } catch (SQLException ex) {
+                Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
            gamePanel.setKerdesSorszam(++kerdesSorszam,round);
         }else{
            gamePanel.playEndMessage();
@@ -137,6 +144,20 @@ public class Modell {
     public void newPlayer() {
         waiting.newPlayer();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void startNewSzerver(String toString) {
+        try{
+           gameLogic.startSzerver(Integer.parseInt(toString)); 
+        }catch (Exception e){
+            System.err.println("Illegal number format");
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void serverAddress(int port) {
+        l.MakeServerPortMessage(Integer.toString(port));
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
  

@@ -15,6 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class login extends javax.swing.JFrame {
 
+     void MakeServerPortMessage(String toString5) {
+        JOptionPane.showMessageDialog(this, "A szerver az alabbi porton elindult: "+toString5);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void sendUserMessage() {
         JOptionPane.showMessageDialog(this, "A nev mezo kitoltese kotelezo!");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -33,6 +38,7 @@ public class login extends javax.swing.JFrame {
         jButton1.setText("játékleírás");
         jLabel2.setText("Kezdéshez add meg a neved!");
         jButton2.setText("START");
+        jButton3.setText("Start Szerver");
         jTextField1.setText("");
         setVisible(true);
     }
@@ -55,6 +61,7 @@ public class login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,6 +119,15 @@ public class login extends javax.swing.JFrame {
         getContentPane().add(jTextField2);
         jTextField2.setBounds(150, 150, 220, 22);
 
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(60, 50, 79, 25);
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1131, 707);
@@ -132,6 +148,11 @@ public class login extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        modell.startNewSzerver(jTextField2.getText().toString());
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +195,7 @@ public class login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -198,4 +220,6 @@ public class login extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Az IP mező kitöltése helytelen!");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 }
