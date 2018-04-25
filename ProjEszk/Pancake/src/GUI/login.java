@@ -151,7 +151,7 @@ public class login extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        modell.startNewSzerver(jTextField2.getText().toString());
+        modell.startNewSzerver(jTextField3.getText().toString());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -218,6 +218,11 @@ public class login extends javax.swing.JFrame {
 
     void sendUserIpMessage() {
         JOptionPane.showMessageDialog(this, "Az IP mező kitöltése helytelen!");
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void makeIllegalNumberForametMessage() {
+        JOptionPane.showMessageDialog(this, "Nem megvalósítható portszám!");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
