@@ -5,7 +5,9 @@
  */
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
@@ -23,19 +25,35 @@ public class GamePanel extends javax.swing.JFrame {
     GamePanel(int round,String playerName, String kerdes, String valasz1, String valasz2, String valasz3, String valasz4) {
         initComponents();
         
-        jLabel1.setText("A kérdés sorszáma: 1/"+Integer.toString(round));
-        jLabel3.setText("Üdvözöljük "+playerName+"!");
-       // String kerdes = client.getNewQuestion();
-       setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("frameIcon.png")));
-       jLabel2.setText(kerdes);
-       jToggleButton1.setText(valasz1);
-       jToggleButton2.setText(valasz2);
-       jToggleButton3.setText(valasz3);
-       jToggleButton4.setText(valasz4);
         
+        // String kerdes = client.getNewQuestion();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("frameIcon.png")));
+    
         setSize(1130, 710);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        
+        jLabel3.setText("Üdvözöljük "+playerName+"!");
+        jLabel1.setText("A kérdés sorszáma: 1/"+Integer.toString(round));
+        jLabel2.setText(kerdes);
+        Font font = new Font("Courier", Font.BOLD, 23);
+        Font font2 = new Font("Courier", Font.BOLD, 27);
+        jLabel2.setFont(font);
+        jLabel3.setFont(font2);
+        jLabel1.setFont(font);
+        
+        
+        jToggleButton1.setText(valasz1);
+        jToggleButton2.setText(valasz2);
+        jToggleButton3.setText(valasz3);
+        jToggleButton4.setText(valasz4);
+        
+        jToggleButton1.setBackground(Color.decode("#8CF9B7"));
+        jToggleButton2.setBackground(Color.decode("#8CF9B7"));
+        jToggleButton3.setBackground(Color.decode("#8CF9B7"));
+        jToggleButton4.setBackground(Color.decode("#8CF9B7"));
+        
+        
         setVisible(true);
         
     }
@@ -70,7 +88,7 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton1);
-        jToggleButton1.setBounds(530, 430, 105, 23);
+        jToggleButton1.setBounds(350, 360, 360, 40);
 
         jToggleButton2.setText("jToggleButton2");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +97,7 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton2);
-        jToggleButton2.setBounds(530, 540, 105, 23);
+        jToggleButton2.setBounds(350, 450, 360, 40);
 
         jToggleButton3.setText("jToggleButton3");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +106,7 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton3);
-        jToggleButton3.setBounds(800, 430, 105, 23);
+        jToggleButton3.setBounds(740, 360, 360, 40);
 
         jToggleButton4.setText("jToggleButton4");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -97,30 +115,29 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton4);
-        jToggleButton4.setBounds(800, 540, 105, 23);
+        jToggleButton4.setBounds(740, 450, 360, 40);
 
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(80, 130, 370, 50);
+        jLabel1.setBounds(60, 130, 370, 50);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(153, 51, 0));
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(320, 280, 790, 80);
+        jLabel2.setBounds(350, 240, 790, 80);
 
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(80, 50, 380, 50);
+        jLabel3.setBounds(300, 30, 520, 70);
 
-        jButton1.setText("játékleírás");
+        jButton1.setText("Játékleírás");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(350, 610, 81, 23);
+        jButton1.setBounds(1031, 670, 90, 23);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel5);

@@ -5,7 +5,9 @@
  */
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 /**
@@ -20,12 +22,20 @@ public class Waiting extends javax.swing.JFrame {
     public Waiting() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("frameIcon.png")));
-        jLabel1.setText("Várakozás a többi játékosra!");
+        jLabel1.setText("Várakozás a többi játékosra...");
         setSize(1130, 710);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        setVisible(true);
         
+        Font font = new Font("Arial Black", Font.ITALIC, 30);
+        jLabel1.setFont(font);
+        jLabel1.setForeground(Color.decode("#F64040"));
+        
+        jTextArea1.setBackground(Color.decode("#F6F7AC"));
+        
+        jTextArea1.setEditable(false);
+        
+        setVisible(true);
     }
 
     /**
@@ -44,16 +54,16 @@ public class Waiting extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Várakozás...");
         setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("jLabel1");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(400, 290, 600, 30);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Hartmann Zsombor\\Desktop\\ajax-loader.gif")); // NOI18N
+        jLabel1.setBounds(280, 100, 600, 100);
         getContentPane().add(jLabel2);
         jLabel2.setBounds(670, 430, 177, 135);
 
@@ -62,7 +72,7 @@ public class Waiting extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(310, 50, 370, 200);
+        jScrollPane1.setBounds(380, 250, 390, 140);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel3);

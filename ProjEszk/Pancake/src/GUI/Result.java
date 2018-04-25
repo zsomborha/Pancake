@@ -84,18 +84,16 @@ public class Result extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(760, 380, 360, 270);
 
-        jButton1.setText("játékleírás");
+        jButton1.setText("Játékleírás");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(340, 610, 180, 30);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Hartmann Zsombor\\Desktop\\index.jpg")); // NOI18N
+        jButton1.setBounds(1020, 670, 90, 23);
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(420, 370, 275, 183);
+        jLabel3.setBounds(420, 370, 0, 0);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel4);

@@ -39,15 +39,7 @@ public class login extends javax.swing.JFrame{
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("frameIcon.png")));
         
-        
-        
-        
-        
-        
-        
         // * LABEL * //
-        
-        
         
         jLabel7.setText("Üdvözlünk a Pancake Quiz játékban!");
         jLabel2.setText("Felhasználóneved: ");
@@ -91,27 +83,27 @@ public class login extends javax.swing.JFrame{
             }
         });
         
-        
         jTextField1.setBackground(Color.decode("#F6F7AC"));
         jTextField2.setBackground(Color.decode("#F6F7AC"));
         jTextField3.setBackground(Color.decode("#F6F7AC"));
-        
-        //textField.setBackground(Color.RED);
-        
-        
+     
         
         // * BUTTON * //
         
         jButton1.setText("játékleírás");
         jButton2.setText("START");
-        jButton3.setText("Start Szerver");
+        jButton3.setText("START SZERVER");
         
         jButton2.setBackground(Color.decode("#F45959"));
         jButton3.setBackground(Color.decode("#F45959"));
         
+        jButton2.setForeground(Color.decode("#960505"));
+        jButton3.setForeground(Color.decode("#960505"));
         
-        
-        
+        Font font3 = new Font("Courier", Font.BOLD, 20);
+        Font font4 = new Font("Courier", Font.BOLD, 12);
+        jButton2.setFont(font3);
+        jButton3.setFont(font4);
         
         
         setVisible(true);
