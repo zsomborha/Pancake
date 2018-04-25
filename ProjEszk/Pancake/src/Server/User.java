@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class User {
     static int playerNo = 0;
@@ -78,7 +80,11 @@ public class User {
                 System.out.println(getPlayerName() + " --> answer : " + answer);
                 return answer;
             } catch (Exception e) {
-                System.err.println("Error at receiving answer: " + e.toString());
+                try {
+                    s.close();
+                } catch (IOException ex) {
+                    System.err.println("Error at closing socket: " + ex.toString());
+                }
                 return 0;
             }
         }
@@ -95,6 +101,18 @@ public class User {
     
     public int getPoints(){
         return this.points;
+    }
+    
+    public boolean isAlive()throws IOException{
+        try{
+            pw.println("PING");
+            pw.flush();
+            sc.nextLine();
+        }catch(Exception e){
+            s.close();
+            return false;
+        }     
+        return true;
     }
     
 }

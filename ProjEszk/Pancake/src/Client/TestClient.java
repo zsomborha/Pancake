@@ -1,5 +1,6 @@
 package Client;
 
+import Client.Client;
 import GameLogic.Player;
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,6 +39,7 @@ public class TestClient {
             System.out.println("TEST: Answer =" + answer);
             c.setSelectedAnswer(answer);
         }
+    
     public static void statusTwo(){    
             //end of question
         }
@@ -50,6 +52,5 @@ public class TestClient {
                 System.out.println("TEST: " + p.GetName() + ": " + p.GetPoints());
             }
         }
-        
     }
     

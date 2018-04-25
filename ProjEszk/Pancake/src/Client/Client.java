@@ -1,5 +1,6 @@
 package Client;
 
+import Client.TestClient.*;
 import GameLogic.Player;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -91,7 +92,6 @@ public class Client {
                                     this.questionID = questionID;
                                     
                                 }else if(   incomingMSG.charAt(1) == '2'){//time is up, send answer
-                                    
                                     this.status = 2;
                                     //GameLogic.GameLogic.statusTwo();//status 2
                                     TestClient.statusTwo();
@@ -100,12 +100,9 @@ public class Client {
                                     pw.flush();
                                     this.selectedAnswer = 4;
                                     
-                                }else if(   incomingMSG.charAt(1) == '3'){//game over
-                                    
+                                }else if(   incomingMSG.charAt(1) == '3'){//game over 
                                     this.status = 3;
-                                    
-                                    
-                                    
+
                                     sc.nextLine();
                                     String playersString = sc.nextLine();
                                     playersToArray(playersString);
@@ -113,6 +110,9 @@ public class Client {
                                     //GameLogic.GameLogic.statusThree();//status 3
                                     TestClient.statusThree();
                                 }
+                            }else{
+                                pw.println("PONG");
+                                pw.flush();
                             }
                             }
                             //question ID

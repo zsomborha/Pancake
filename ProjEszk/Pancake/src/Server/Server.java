@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,10 +66,11 @@ public class Server {
     
     public void startGame(){
         joining.stop();
+        
         try {
             voidSocket();
         } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error at closing joining: " + ex.toString());
         }
         this.gameStart = true;
         System.out.println("Game started");
@@ -76,7 +78,7 @@ public class Server {
         try {
             game(rounds);
         } catch (InterruptedException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error at starting game " + ex.toString());
         }
     }
     
@@ -106,9 +108,13 @@ public class Server {
             //round end
             for(User p : players){
                 p.sendStatus(2);
-                int answer = p.receiveAnswer();
-                if(answer == 2 /*question.answer*/ ){
-                    p.addPoint();
+                try{
+                    int answer = p.receiveAnswer();
+                    if(answer == 2 /*question.answer*/ ){
+                        p.addPoint();
+                    }
+                }catch(NoSuchElementException e){
+                    
                 }
             }   
         }
@@ -131,8 +137,11 @@ public class Server {
             synchronized(players){
                 while(players.size() < maxClients){
                     try{
+                        
                         clientJoin();
                         System.out.println("Client connected: " + players.get(players.size()-1).getPlayerName());
+                        
+                        checkAlivePlayers();
                         
                         for(User p : players){
                             p.sendPlayers(playersToString());
@@ -141,13 +150,8 @@ public class Server {
                         System.err.println("Error at client connecting: " + e.toString());
                     };
                 }
-                System.out.println("Max players reached");
                 
-                try {
-                    game(rounds);
-                } catch (InterruptedException ex) {
-                    
-                }
+                System.out.println("Max players reached");
             }
         });
         
@@ -183,5 +187,14 @@ public class Server {
         }
         
         return(result.substring(0, result.length() - 1));
+    }
+    
+    private void checkAlivePlayers() throws IOException{
+        for(User p : players){
+            if(!p.isAlive() ){                               
+                    System.out.println("Client disconnected: " + p.getPlayerName() );
+                    players.remove(p);
+                }
+            }
     }
 }
