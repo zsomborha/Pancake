@@ -11,6 +11,7 @@ import Database.Entities.Question;
 import GUI.Modell;
 import Server.Server;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,36 +34,40 @@ public class GameLogic {
     
     public GameLogic() throws Exception{
         modell = new Modell(this);
-        /*
-        List<Question> list;
-        list = DataSource.getInstance().getQuestionController().getEntities();
-        list.get(1).getQuestionString();
-        */
+
         
 
     }
     
-    public static void statusOne(){
+
+    
+    public static void statusChange(int status){
+        System.out.println(status);
+    }
+    
+
+    
+    public static void statusZero(){
+        //itt csatalozik uj jatekos
+        modell.newPlayer();
+    }
+    
+        public static void statusOne(){
         try {
             modell.GamePanelCreate(10);
         } catch (SQLException ex) {
             Logger.getLogger(GameLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static void statusChange(int status){
-        System.out.println(status);
-       // if (status)
-    }
-    
-    public void newPlayerJoined(){
-        modell.newPlayer();
-    }
-    
-    public sattic void statusZero(//nincs){
-        //itt csatalozik uj jatekos
-    }
+         public static void statusTwo(){    
+            //end of question
+            modell.endOfQuestion();
+        }
 
+        public static void statusThree(){    
+            //end of question
+            
+        }
     
     public void startCommunication(String playerName, String ip, String port) {
         client = new Client(Integer.parseInt(port), ip, playerName);
@@ -70,9 +75,7 @@ public class GameLogic {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void allClientsReady(int round) throws SQLException{
-        modell.GamePanelCreate(round);
-    }
+  
     
 
 
@@ -90,21 +93,19 @@ public class GameLogic {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void sendAnswer(String answer) {
-          //client.sendAnswer(answer);
-          client.setSelectedAnswer(0);
-          
-        
+    public void sendAnswer(int answer) {
+          client.setSelectedAnswer(answer);    
     }
     
-    public void endOfQuestions(){
-        
-    }
+    
 
-    public String[][] getResult() {
-        //return client.getResult();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return null;
+     
+
+
+
+    public ArrayList getResult() {
+        
+        return client.getPlayers();
     }
 
     public void startSzerver(int parseInt) {

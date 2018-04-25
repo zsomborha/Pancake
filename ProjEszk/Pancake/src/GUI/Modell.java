@@ -7,8 +7,10 @@ package GUI;
 
 import Client.Client;
 import GameLogic.GameLogic;
+import GameLogic.Player;
 import java.awt.Toolkit;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,7 +98,7 @@ public class Modell {
         }
     }
 
-    void seAnswer(String answer) {
+    void seAnswer(int answer) {
         //client.sendAnswer(answer)
         gameLogic.sendAnswer(answer);
         if (kerdesSorszam<round){
@@ -111,21 +113,21 @@ public class Modell {
            gamePanel.setKerdesSorszam(++kerdesSorszam,round);
         }else{
            gamePanel.playEndMessage();
-           String[][] results= gameLogic.getResult();
-           setResults(results);
+           //String[][] results= gameLogic.getResult();
+           //setResults(results);
         }
         
     }
     
     void setResults(String[][] results){
-        result.setResults(results);
+        //result.setResults(results);
         String[] winner=results[0];
         for(int i=1;i<results.length;i++){
             if (Integer.parseInt(results[i][1]) > Integer.parseInt(winner[1])){
                 winner = results[i];
             }
         }
-        result.setWinner(winner);
+       // result.setWinner(winner);
         GameLogic.closeconnection();
     }
 
@@ -148,9 +150,14 @@ public class Modell {
 
     void startNewSzerver(String toString) {
         try{
+            int port = Integer.parseInt(toString);
+            if(port<1 || port>65535){
+               throw new Exception();
+            }
            gameLogic.startSzerver(Integer.parseInt(toString)); 
         }catch (Exception e){
             System.err.println("Illegal number format");
+            l.makeIllegalNumberForametMessage();
         }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -158,6 +165,36 @@ public class Modell {
     public void serverAddress(int port) {
         l.MakeServerPortMessage(Integer.toString(port));
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    String[][] getResults() {
+        ArrayList<Player> list = gameLogic.getResult();
+        String[][] results = new String[list.size()][];
+        
+        for(int i=0;i<list.size();i++){
+            results[i][0] = list.get(i).GetName();
+            results[i][1] = Integer.toString(list.get(i).GetPoints());
+        }
+        return results;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void endOfQuestion() {
+        gamePanel.dispose();
+        result= new Result(playerName);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Player getWinner() {
+        ArrayList<Player> list = gameLogic.getResult();
+        Player winner = list.get(0);
+        for(int i=0;i<list.size();i++){
+            if (list.get(i).GetPoints() > winner.GetPoints()){
+                winner = list.get(i);
+            }
+        }
+        return winner;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
  
