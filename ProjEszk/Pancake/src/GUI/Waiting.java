@@ -39,7 +39,8 @@ public class Waiting extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,8 +56,13 @@ public class Waiting extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Hartmann Zsombor\\Desktop\\ajax-loader.gif")); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(670, 430, 177, 135);
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(140, 100, 0, 0);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(310, 50, 370, 200);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -104,11 +110,13 @@ public class Waiting extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
     void newPlayer() {
-        jLabel4.setText(jLabel4.getText().toString()+" "+"Uj jatekos csatlakozott!");
+        //jLabel4.setText(jLabel4.getText().toString()+" "+"Uj jatekos csatlakozott!");
+        jTextArea1.setText(jTextArea1.getText()+"\nUj jatekos csatlakozott!");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
