@@ -70,7 +70,7 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton1);
-        jToggleButton1.setBounds(530, 430, 119, 25);
+        jToggleButton1.setBounds(530, 430, 105, 23);
 
         jToggleButton2.setText("jToggleButton2");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +79,7 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton2);
-        jToggleButton2.setBounds(530, 540, 119, 25);
+        jToggleButton2.setBounds(530, 540, 105, 23);
 
         jToggleButton3.setText("jToggleButton3");
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +88,7 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton3);
-        jToggleButton3.setBounds(800, 430, 119, 25);
+        jToggleButton3.setBounds(800, 430, 105, 23);
 
         jToggleButton4.setText("jToggleButton4");
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +97,7 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton4);
-        jToggleButton4.setBounds(800, 540, 119, 25);
+        jToggleButton4.setBounds(800, 540, 105, 23);
 
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
@@ -120,7 +120,7 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(350, 610, 91, 25);
+        jButton1.setBounds(350, 610, 81, 23);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel5);
