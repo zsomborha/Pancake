@@ -28,7 +28,6 @@ public class TestClient {
         } catch (Exception ex) {
             Logger.getLogger(TestClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
     public static void statusZero(){

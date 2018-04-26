@@ -26,9 +26,15 @@ public class GameLogic {
         //client.closeConnection();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public static void startGame() {
+        server.startGame();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     Modell modell;
     Client client;
+    static Server server;
     
     public static void main(String[] args) throws Exception{ GameLogic g = new GameLogic();}
     
@@ -107,7 +113,7 @@ public class GameLogic {
     }
 
     public void startSzerver(int parseInt) {
-        Server server = new Server(parseInt, 10,5);
+        server = new Server(parseInt, 10,5);
         modell.serverAddress(server.getPORT());
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

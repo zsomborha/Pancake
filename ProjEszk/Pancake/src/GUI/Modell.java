@@ -73,6 +73,7 @@ public class Modell {
         System.out.println("startNewGame");
         waiting = new Waiting();
         waiting.setSize(1130, 710);
+        waiting.setModell(this);
         this.playerName=playerName;
       //  waitFiveSecounds();
       //  GamePanelCreate();
@@ -200,6 +201,15 @@ public class Modell {
         }
         return winner;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void startGame() {
+        try {
+            GamePanelCreate(0);
+            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } catch (SQLException ex) {
+            Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
  

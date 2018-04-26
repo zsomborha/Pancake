@@ -70,6 +70,7 @@ public class Server {
     }
     
     public void startGame(){
+        
         joining.stop();
         
         try {
@@ -77,6 +78,7 @@ public class Server {
         } catch (IOException ex) {
             System.err.println("Error at closing joining: " + ex.toString());
         }
+        
         this.gameStart = true;
         System.out.println("Game started");
         
