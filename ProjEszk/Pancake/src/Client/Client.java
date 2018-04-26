@@ -77,15 +77,15 @@ public class Client {
                                 
                                 playersToArray(playersString);
                                 
-                                //GameLogic.GameLogic.statusZero();//status 0
-                                TestClient.statusZero();
+                                GameLogic.GameLogic.statusZero();//status 0
+                                //TestClient.statusZero();
                                 
                             }else
                             if(incomingMSG.charAt(0) == 'S'){ //Status change
                                 if(         incomingMSG.charAt(1) == '1'){//question ID  incoming
                                     this.status = 1;
-                                    //GameLogic.GameLogic.statusOne();//status 1
-                                    TestClient.statusOne();
+                                    GameLogic.GameLogic.statusOne();//status 1
+                                    //TestClient.statusOne();
                                     
                                     int questionID = sc.nextInt();
                                     //TODO getQuestion(questionID)
@@ -93,8 +93,8 @@ public class Client {
                                     
                                 }else if(   incomingMSG.charAt(1) == '2'){//time is up, send answer
                                     this.status = 2;
-                                    //GameLogic.GameLogic.statusTwo();//status 2
-                                    TestClient.statusTwo();
+                                    GameLogic.GameLogic.statusTwo();//status 2
+                                    //TestClient.statusTwo();
                                     
                                     pw.println(selectedAnswer);
                                     pw.flush();
@@ -107,8 +107,8 @@ public class Client {
                                     String playersString = sc.nextLine();
                                     playersToArray(playersString);
                                     
-                                    //GameLogic.GameLogic.statusThree();//status 3
-                                    TestClient.statusThree();
+                                    GameLogic.GameLogic.statusThree();//status 3
+                                    //TestClient.statusThree();
                                 }
                             }else{
                                 pw.println("PONG");

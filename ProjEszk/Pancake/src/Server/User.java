@@ -73,10 +73,10 @@ public class User {
         }
     }
     
-    public int receiveAnswer(){
+    public String receiveAnswer(){
         if(!s.isClosed()){
             try {
-                int answer = Integer.parseInt(sc.nextLine());
+                String answer = sc.nextLine();
                 System.out.println(getPlayerName() + " --> answer : " + answer);
                 return answer;
             } catch (Exception e) {
@@ -85,10 +85,10 @@ public class User {
                 } catch (IOException ex) {
                     System.err.println("Error at closing socket: " + ex.toString());
                 }
-                return 0;
+                return "";
             }
         }
-        return 0;
+        return "";
     }
     
     public String getPlayerName(){

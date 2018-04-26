@@ -1,10 +1,14 @@
 package Server;
 
+import Database.DataSource;
+import Database.Entities.Question;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.logging.Level;
@@ -77,7 +81,7 @@ public class Server {
         
         try {
             game(rounds);
-        } catch (InterruptedException ex) {
+        } catch (Exception ex) {
             System.err.println("Error at starting game " + ex.toString());
         }
     }
@@ -86,7 +90,9 @@ public class Server {
         
     }
     
-    private void game(int rounds) throws InterruptedException{
+    private void game(int rounds) throws InterruptedException, SQLException{
+        List<Question> list = DataSource.getInstance().getQuestionController().getEntities();
+        
         for(int i = 0; i < rounds; ++i){
             
             //round start
@@ -96,26 +102,28 @@ public class Server {
            }
             
             Random random = new Random();
-            int  n = random.nextInt(50) + 1;
-            int questionID = n;
-            
+            int  n = random.nextInt(list.size());
+            int questionID = list.get(n).getId().intValue();
+
             for(User p : players){
                 p.sendQuestion(questionID);
             }
             ////////////////////////////
             Thread.sleep(timePerQuestion * 1000);
             ////////////////////////////
+            
             //round end
             for(User p : players){
                 p.sendStatus(2);
                 try{
-                    int answer = p.receiveAnswer();
-                    if(answer == 2 /*question.answer*/ ){
+                    String answer = p.receiveAnswer();
+                    if(answer.equals( list.get(n).getCorrectAnswer() ) ) /*question.answer*/{
                         p.addPoint();
                     }
                 }catch(NoSuchElementException e){
                     
                 }
+                Thread.sleep(1000);
             }   
         }
         
