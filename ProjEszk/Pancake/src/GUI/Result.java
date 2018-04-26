@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import GameLogic.Player;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Timer;
@@ -33,6 +34,7 @@ public class Result extends javax.swing.JFrame {
         setSize(1130, 710);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        setResults();
         setVisible(true);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -82,18 +84,16 @@ public class Result extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(760, 380, 360, 270);
 
-        jButton1.setText("játékleírás");
+        jButton1.setText("Játékleírás");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(340, 610, 180, 30);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Hartmann Zsombor\\Desktop\\index.jpg")); // NOI18N
+        jButton1.setBounds(1020, 670, 90, 23);
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(420, 370, 275, 183);
+        jLabel3.setBounds(420, 370, 0, 0);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel4);
@@ -152,35 +152,22 @@ public class Result extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    void setResults(String[][] results) {
-                DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
-
+    void setResults() {
+        DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
+        String results[][] = modell.getResults();
         
         for(int i=0;i<results.length;i++){
             String row[] = results[i];
             dm.addRow(row);
         }
-            /*
-            String csNev = Storage.aCsapatok.get(i);
-            for(int k=0;k<Storage.aCsoportMerkozesek.size();k++){
-                            if(Storage.aCsoportMerkozesek.get(k).csapat1.equals(csNev)){
-                                csapatpont = csapatpont + Storage.aCsoportMerkozesek.get(k).kapottPontCcsapat1;
-                            }
-                            if(Storage.aCsoportMerkozesek.get(k).csapat2.equals(csNev)){
-                               csapatpont = csapatpont + Storage.aCsoportMerkozesek.get(k).kapottPontCsapat2; 
-                                        
-                            }
-            }
-            String b[] = {csNev,Integer.toString(csapatpont)};
-            dm2.addRow(b);
-        }
-        
-        */
+        setWinner();
+
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    void setWinner(String[] winner) {
-        jLabel2.setText("A kor gyoztese: "+winner[0]+" "+winner[1]+" ponttal! Gratulalunk!");
+    void setWinner() {
+        Player winner = modell.getWinner();
+        jLabel2.setText("A kor gyoztese: "+winner.GetName()+" "+winner.GetPoints()+" ponttal! Gratulalunk!");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
