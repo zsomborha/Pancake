@@ -57,15 +57,17 @@ public class GameLogic {
     
     public void statusOne(){
         try {
-            modell.GamePanelCreate(10);
-        } catch (SQLException ex) {
+          modell.gamePanelDelete();
+          modell.GamePanelCreate(10);
+            
+        } catch (Exception ex) {
             Logger.getLogger(GameLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void statusTwo(){    
             //end of question
-        modell.endOfQuestion();
+        //modell.endOfQuestion();
     }
 
     public void statusThree(){    
@@ -74,7 +76,12 @@ public class GameLogic {
     }
     
     public void startCommunication(String playerName, String ip, String port) {
-        client = new Client(Integer.parseInt(port), ip, playerName,this);
+        
+        Thread c = new Thread( ()-> {
+            client = new Client(Integer.parseInt(port), ip, playerName,this);
+        });
+        
+        c.start();
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -85,8 +92,10 @@ public class GameLogic {
 
     public String[] getQuestion() throws SQLException {
 
+        
         int index = client.getQuestionID();
-        Question myQuestion = DataSource.getInstance().getQuestionController().getEntityById(index);
+        Question myQuestion = DataSource.getInstance().getQuestionController().getEntities().get(index);
+        
         List<String> answers = myQuestion.getAnswers();
         
         
@@ -97,15 +106,10 @@ public class GameLogic {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void sendAnswer(int answer) {
+    public void sendAnswer(String answer) {
           client.setSelectedAnswer(answer);    
     }
     
-    
-
-     
-
-
 
     public ArrayList getResult() {
         
@@ -113,8 +117,18 @@ public class GameLogic {
     }
 
     public void startSzerver(int parseInt) {
-        server = new Server(parseInt, 10,5);
-        modell.serverAddress(server.getPORT());
+        
+        Thread s = new Thread(  ()-> {
+            server = new Server(parseInt, 10,5);
+            modell.serverAddress(server.getPORT());
+        });
+        
+        s.start();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setupServer() {
+        //server.startGame();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

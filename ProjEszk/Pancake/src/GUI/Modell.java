@@ -83,11 +83,18 @@ public class Modell {
     public void GamePanelCreate(int round) throws SQLException{
         this.round=round;
         waiting.dispose();
-        String[] question = gameLogic.getQuestion();
+        
         //String[] question = {"elso kerdes","A","B","C","D"};
-        gamePanel = new GamePanel(round,playerName,question[0],question[1],question[2],question[3],question[4]);
+        String[] question = gameLogic.getQuestion();
+        gamePanel = new GamePanel(this,round,playerName,question[0],question[1],question[2],question[3],question[4]);
         gamePanel.setSize(1130, 710);
-        gamePanel.setModell(this);
+        try {
+            Thread.sleep(200);
+            
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }
     
@@ -99,15 +106,15 @@ public class Modell {
         }
     }
 
-    void seAnswer(int answer) {
+    void seAnswer(String answer) {
         //client.sendAnswer(answer)
         gameLogic.sendAnswer(answer);
         if (kerdesSorszam<round){
            String[] question;
             try {
-                question = gameLogic.getQuestion();
-                gamePanel.setNewQuestion(question[0],question[1],question[2],question[3],question[4]);
-            } catch (SQLException ex) {
+                //question = gameLogic.getQuestion();
+               // gamePanel.setNewQuestion(question[0],question[1],question[2],question[3],question[4]);
+            } catch (Exception ex) {
                 Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
             }
            
@@ -205,11 +212,26 @@ public class Modell {
 
     void startGame() {
         try {
-            GamePanelCreate(0);
+            GamePanelCreate(10);
+            
+            //gameLogic.setupServer();
+            
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void gamePanelDelete() {
+        if(gamePanel != null){
+            gamePanel.dispose();
+        }
+            
+    }
+
+    void nowServer() {
+        gameLogic.setupServer();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
  

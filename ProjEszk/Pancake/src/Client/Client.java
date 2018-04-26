@@ -19,7 +19,7 @@ public class Client {
     private GameLogic.GameLogic gl;
     private int status = 0; //0-lobby 1-kérdés 2-kérdés vége 3-játék vége
     private int questionID;
-    private int selectedAnswer = 4; //4-if not selected anything
+    private String selectedAnswer = ""; //4-if not selected anything
     
     public Client(int PORT, String IP, String name,GameLogic.GameLogic gl){
         try {
@@ -74,7 +74,7 @@ public class Client {
                         if(sc.hasNextLine()){
                             incomingMSG = sc.nextLine();
                         }
-                        //System.out.println(incomingMSG);
+                        System.out.println("Client rec: " + incomingMSG);
                         if(!incomingMSG.equals("")){
                             if(incomingMSG.charAt(0) == 'N'){ //new Client
                                 
@@ -104,7 +104,7 @@ public class Client {
                                     
                                     pw.println(selectedAnswer);
                                     pw.flush();
-                                    this.selectedAnswer = 4;
+                                    this.selectedAnswer = "";
                                     
                                 }else if(   incomingMSG.charAt(1) == '3'){//game over 
                                     this.status = 3;
@@ -130,7 +130,7 @@ public class Client {
                 }
     }
         
-    public void setSelectedAnswer(int sa){
+    public void setSelectedAnswer(String sa){
         this.selectedAnswer = sa;
     }
     

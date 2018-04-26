@@ -106,6 +106,10 @@ public class login extends javax.swing.JFrame{
         jButton3.setFont(font4);
         
         
+        jTextField1.setText("asd");
+        jTextField2.setText("localhost");
+        jTextField3.setText("1234");
+        
         setVisible(true);
     }
 
@@ -139,7 +143,7 @@ public class login extends javax.swing.JFrame{
 
         jLabel1.setText("Üdvözlünk a Pancake Quiz játékban!");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(1227, 48, 174, 14);
+        jLabel1.setBounds(1227, 48, 205, 16);
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,13 +152,18 @@ public class login extends javax.swing.JFrame{
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(12, 1002, 73, 23);
+        jButton1.setBounds(12, 1002, 79, 25);
 
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(360, 390, 260, 30);
 
         jTextField1.setText("jTextField1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextField1);
         jTextField1.setBounds(620, 390, 250, 30);
 
@@ -230,6 +239,10 @@ public class login extends javax.swing.JFrame{
         // TODO add your handling code here:
         modell.startNewSzerver(jTextField3.getText().toString());
     }//GEN-LAST:event_jButton3ActionPerformed1
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments

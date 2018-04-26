@@ -101,14 +101,16 @@ public class Server {
             //round start
             for(User p : players){
                 p.sendStatus(1);
+                System.out.println("Server send: " + "S1");
                 System.out.println(p.getPlayerName() + " S1 "); 
            }
             
             Random random = new Random();
-            int  n = random.nextInt(list.size());
+            int  n = random.nextInt(list.size() -1);
             int questionID = list.get(n).getId().intValue();
 
             for(User p : players){
+                System.out.println("Server send: " + questionID);
                 p.sendQuestion(questionID);
             }
             ////////////////////////////
@@ -118,6 +120,7 @@ public class Server {
             //round end
             for(User p : players){
                 p.sendStatus(2);
+                System.out.println("Server send: " + "S2");
                 try{
                     String answer = p.receiveAnswer();
                     if(answer.equals( list.get(n).getCorrectAnswer() ) ) /*question.answer*/{
@@ -131,6 +134,7 @@ public class Server {
         }
         
         for(User p : players){
+                System.out.println("Server send: " + "S3");
                 p.sendStatus(3);
                 p.sendPlayers(playersToString());
         }

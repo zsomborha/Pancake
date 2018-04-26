@@ -22,10 +22,10 @@ public class GamePanel extends javax.swing.JFrame {
      */
     Modell modell;
 
-    GamePanel(int round,String playerName, String kerdes, String valasz1, String valasz2, String valasz3, String valasz4) {
+    GamePanel(Modell modell,int round,String playerName, String kerdes, String valasz1, String valasz2, String valasz3, String valasz4) {
         initComponents();
         
-        
+        this.modell = modell;
         // String kerdes = client.getNewQuestion();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("frameIcon.png")));
     
@@ -55,7 +55,7 @@ public class GamePanel extends javax.swing.JFrame {
         
         
         setVisible(true);
-        
+        modell.nowServer();
     }
 
     /**
@@ -148,23 +148,23 @@ public class GamePanel extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        modell.seAnswer(0);
+        modell.seAnswer(jToggleButton1.getText());
         
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
-        modell.seAnswer(1);
+        modell.seAnswer(jToggleButton2.getText());
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         // TODO add your handling code here:
-        modell.seAnswer(2);
+        modell.seAnswer(jToggleButton3.getText());
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         // TODO add your handling code here:
-        modell.seAnswer(3);
+        modell.seAnswer(jToggleButton4.getText());
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

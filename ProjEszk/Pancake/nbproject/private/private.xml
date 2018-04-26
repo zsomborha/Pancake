@@ -3,14 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/Pancake/ProjEszk/Pancake/src/Server/Player.java</file>
-            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/Pancake/ProjEszk/Pancake/src/Server/Server.java</file>
-            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/Pancake/ProjEszk/Pancake/src/GUI/Modell.java</file>
-            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/Pancake/ProjEszk/Pancake/src/GUI/Waiting.java</file>
-            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/Pancake/ProjEszk/Pancake/src/GUI/GUI.java</file>
-            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/Pancake/ProjEszk/Pancake/src/pancake/Pancake.java</file>
-            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/Pancake/ProjEszk/Pancake/src/GUI/login.java</file>
-            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/Pancake/ProjEszk/Pancake/src/GUI/GamePanel.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GameLogic/GameLogic.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/GUI.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GameLogic/Player.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/Database/Entities/Question.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/Modell.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/data.sql</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/Database/DatabaseSetup.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/GamePanel.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/Client/TestClient.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/login.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/Result.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/test/DatabaseTest/DatabaseTest.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/Server/Server.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/Client/Client.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/Waiting.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/GameDescription.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GameLogic/Main.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/pancake/Pancake.java</file>
+            <file>file:/C:/Users/Hartmann%20Zsombor/Documents/GitHub/Pancake/ProjEszk/Pancake/src/Server/User.java</file>
         </group>
     </open-files>
 </project-private>
