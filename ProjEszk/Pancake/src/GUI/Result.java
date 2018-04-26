@@ -8,6 +8,7 @@ package GUI;
 import GameLogic.Player;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.table.DefaultTableModel;
@@ -26,7 +27,7 @@ public class Result extends javax.swing.JFrame {
     Modell modell;
     boolean be1 = false;
 
-    Result(String playerName) {
+    Result(String playerName,ArrayList<Player> p) {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("frameIcon.png")));
         jLabel1.setText("Üdvözöljük "+playerName+"!");
@@ -34,7 +35,7 @@ public class Result extends javax.swing.JFrame {
         setSize(1130, 710);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        setResults();
+        setResults(p);
         setVisible(true);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -52,7 +53,6 @@ public class Result extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -83,15 +83,6 @@ public class Result extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(760, 380, 360, 270);
-
-        jButton1.setText("Játékleírás");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(1020, 670, 90, 23);
         getContentPane().add(jLabel3);
         jLabel3.setBounds(420, 370, 0, 0);
 
@@ -101,11 +92,6 @@ public class Result extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        modell.startGameDescrition();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,13 +123,12 @@ public class Result extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Result("Anonymus").setVisible(true);
+                //new Result("Anonymus").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -152,21 +137,25 @@ public class Result extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    void setResults() {
+    void setResults(ArrayList<Player> p) {
         DefaultTableModel dm = (DefaultTableModel) jTable1.getModel();
-        String results[][] = modell.getResults();
+        System.out.println("setresults");
+//        String results[][] = modell.getResults();
         
-        for(int i=0;i<results.length;i++){
-            String row[] = results[i];
+        for(int i=0;i<p.size();i++){
+            String row[] = {p.get(i).GetName(),Integer.toString(p.get(i).GetPoints())};
             dm.addRow(row);
         }
-        setWinner();
+
+        setWinner(p);
 
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    void setWinner() {
-        Player winner = modell.getWinner();
+    void setWinner(ArrayList<Player> p) {
+        Player winner = p.get(0);
+        
+       // Player winner = modell.getWinner();
         jLabel2.setText("A kor gyoztese: "+winner.GetName()+" "+winner.GetPoints()+" ponttal! Gratulalunk!");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

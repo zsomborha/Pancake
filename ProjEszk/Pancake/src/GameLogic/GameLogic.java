@@ -22,19 +22,17 @@ import java.util.logging.Logger;
  */
 public class GameLogic {
 
-    public static void closeconnection() {
-        //client.closeConnection();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
     public static void startGame() {
         server.startGame();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     Modell modell;
     Client client;
     static Server server;
+    boolean first = true;
+    ArrayList<Player> playersResults;
     
     public static void main(String[] args) throws Exception{ GameLogic g = new GameLogic();}
     
@@ -57,8 +55,13 @@ public class GameLogic {
     
     public void statusOne(){
         try {
-          modell.gamePanelDelete();
-          modell.GamePanelCreate(10);
+          if(first){
+              modell.GamePanelCreate(10);
+              first = false;
+          }else{
+              modell.refreshQuestion();
+          }
+          
             
         } catch (Exception ex) {
             Logger.getLogger(GameLogic.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,13 +69,12 @@ public class GameLogic {
     }
     
     public void statusTwo(){    
-            //end of question
-        //modell.endOfQuestion();
+        System.out.println("Status 2");
     }
 
-    public void statusThree(){    
-            //end of question
-            
+    public void statusThree(){
+           playersResults = client.getPlayers();
+           modell.endOfQuestion(playersResults);
     }
     
     public void startCommunication(String playerName, String ip, String port) {
@@ -82,8 +84,6 @@ public class GameLogic {
         });
         
         c.start();
-        
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
   
@@ -94,16 +94,10 @@ public class GameLogic {
 
         
         int index = client.getQuestionID();
-        Question myQuestion = DataSource.getInstance().getQuestionController().getEntities().get(index);
-        
+        Question myQuestion = DataSource.getInstance().getQuestionController().getEntities().get(index);        
         List<String> answers = myQuestion.getAnswers();
-        
-        
-        //String[] questionWithAnswers = {"Mi a helyes valasz?", "Egy", "ketto", "harom", "negy"};
         String[] questionWithAnswers = {myQuestion.getQuestionString(), answers.get(0), answers.get(1), answers.get(2), answers.get(3)};
-        
         return questionWithAnswers;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void sendAnswer(String answer) {
@@ -112,7 +106,7 @@ public class GameLogic {
     
 
     public ArrayList getResult() {
-        
+        System.out.println("meret"+client.getPlayers().size());
         return client.getPlayers();
     }
 
@@ -124,18 +118,7 @@ public class GameLogic {
         });
         
         s.start();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public void setupServer() {
-        //server.startGame();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-
-
-    
-    
-    
+        
     
 }

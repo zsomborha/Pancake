@@ -8,6 +8,7 @@ package GUI;
 import Client.Client;
 import GameLogic.GameLogic;
 import GameLogic.Player;
+import Server.ServerStarter;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -43,7 +44,6 @@ public class Modell {
         l.setSize(1130, 710);
         l.setModell(this);
         gameLogic=aThis;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -64,10 +64,7 @@ public class Modell {
             l.sendUserIpMessage();
             return;
         }
-        
-        
-        //TODO CLIENT STARTNEWGAME
-        
+               
         gameLogic.startCommunication(playerName,ip,port);
         l.dispose();
         System.out.println("startNewGame");
@@ -75,16 +72,13 @@ public class Modell {
         waiting.setSize(1130, 710);
         waiting.setModell(this);
         this.playerName=playerName;
-      //  waitFiveSecounds();
-      //  GamePanelCreate();
+
     }
     
     
     public void GamePanelCreate(int round) throws SQLException{
         this.round=round;
         waiting.dispose();
-        
-        //String[] question = {"elso kerdes","A","B","C","D"};
         String[] question = gameLogic.getQuestion();
         gamePanel = new GamePanel(this,round,playerName,question[0],question[1],question[2],question[3],question[4]);
         gamePanel.setSize(1130, 710);
@@ -98,57 +92,27 @@ public class Modell {
         
     }
     
-    void waitFiveSecounds(){
-                try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     void seAnswer(String answer) {
-        //client.sendAnswer(answer)
+
         gameLogic.sendAnswer(answer);
         if (kerdesSorszam<round){
-           String[] question;
-            try {
-                //question = gameLogic.getQuestion();
-               // gamePanel.setNewQuestion(question[0],question[1],question[2],question[3],question[4]);
-            } catch (Exception ex) {
-                Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           
-           gamePanel.setKerdesSorszam(++kerdesSorszam,round);
         }else{
            gamePanel.playEndMessage();
-           //String[][] results= gameLogic.getResult();
-           //setResults(results);
         }
         
     }
     
-    void setResults(String[][] results){
-        //result.setResults(results);
-        String[] winner=results[0];
-        for(int i=1;i<results.length;i++){
-            if (Integer.parseInt(results[i][1]) > Integer.parseInt(winner[1])){
-                winner = results[i];
-            }
-        }
-       // result.setWinner(winner);
-        GameLogic.closeconnection();
-    }
+
 
     void startGameDescrition() {
         if (gameDescripton==null){
             gameDescripton = new GameDescription();
-           // gameDescripton.setSize(1130, 710);
         }
         else{
             gameDescripton.show();
             
         }
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void newPlayer() {
@@ -158,26 +122,16 @@ public class Modell {
         }catch(Exception ex){
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     void startNewSzerver(String toString) {
-        try{
-            int port = Integer.parseInt(toString);
-            if(port<1 || port>65535){
-               throw new Exception();
-            }
-           gameLogic.startSzerver(Integer.parseInt(toString)); 
-        }catch (Exception e){
-            System.err.println("Illegal number format");
-            l.makeIllegalNumberForametMessage();
-        }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        ServerStarter.main(null);
+  
     }
 
     public void serverAddress(int port) {
         l.MakeServerPortMessage(Integer.toString(port));
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     String[][] getResults() {
@@ -189,49 +143,35 @@ public class Modell {
             results[i][1] = Integer.toString(list.get(i).GetPoints());
         }
         return results;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void endOfQuestion() {
+    public void endOfQuestion(ArrayList<Player> p) {
         gamePanel.dispose();
-        result= new Result(playerName);
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        result= new Result(playerName,p);
     }
 
-    Player getWinner() {
-        ArrayList<Player> list = gameLogic.getResult();
-        Player winner = list.get(0);
-        for(int i=0;i<list.size();i++){
-            if (list.get(i).GetPoints() > winner.GetPoints()){
-                winner = list.get(i);
-            }
-        }
-        return winner;
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
     void startGame() {
         try {
             GamePanelCreate(10);
             
-            //gameLogic.setupServer();
-            
-            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         } catch (Exception ex) {
             Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void gamePanelDelete() {
-        if(gamePanel != null){
-            gamePanel.dispose();
-        }
-            
-    }
 
-    void nowServer() {
-        gameLogic.setupServer();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+
+    public void refreshQuestion() {
+        try {
+            gamePanel.setKerdesSorszam(++kerdesSorszam,round);
+            String[] question = gameLogic.getQuestion();
+            gamePanel.setNewQuestion(question[0],question[1],question[2],question[3],question[4]);
+        } catch (SQLException ex) {
+            Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
  

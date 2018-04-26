@@ -112,8 +112,9 @@ public class Client {
                                     sc.nextLine();
                                     String playersString = sc.nextLine();
                                     playersToArray(playersString);
-                                    
+                                    System.out.println("ok0");
                                     gl.statusThree();//status 3
+                                   
                                     //TestClient.statusThree();
                                 }
                             }else{
@@ -157,6 +158,7 @@ public class Client {
             players.get(i).setPoints( Integer.parseInt(p[1]) );
         }
         
+        System.out.println("a tomb merete:"+this.players.size());
         return(players);
     }
     

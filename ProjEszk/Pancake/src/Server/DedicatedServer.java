@@ -18,6 +18,7 @@ public class DedicatedServer {
                 int PORT = server.getPORT();
                 System.out.println(PORT);
                 
+                
                 try {
 
                     scIN.nextLine();
@@ -33,12 +34,16 @@ public class DedicatedServer {
                /* for(String name : server.getPlayers()){
                     System.out.println(name) ;
                 }*/
+               
                 
             });
             
             createServer.start();
             
             createServer.join();
-                    
+            
+            
+       
+            
     }
 }

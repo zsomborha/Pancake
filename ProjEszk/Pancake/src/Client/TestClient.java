@@ -44,7 +44,7 @@ public class TestClient {
             Random rand = new Random();
             int answer = rand.nextInt(4);
             System.out.println("TEST: Answer =" + answer);
-            c.setSelectedAnswer(answer);
+           // c.setSelectedAnswer(answer);
         }
     
     public static void statusTwo(){    

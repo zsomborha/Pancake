@@ -5,6 +5,10 @@
  */
 package pancake;
 
+import GameLogic.GameLogic;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author gépecske
@@ -15,7 +19,12 @@ public class Pancake {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            // TODO code application logic here
+            GameLogic gameLogic = new GameLogic();
+        } catch (Exception ex) {
+            Logger.getLogger(Pancake.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
