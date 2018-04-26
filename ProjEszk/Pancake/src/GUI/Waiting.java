@@ -124,9 +124,10 @@ public class Waiting extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
-    void newPlayer() {
+    public void newPlayer() {
         //jLabel4.setText(jLabel4.getText().toString()+" "+"Uj jatekos csatlakozott!");
-        jTextArea1.setText(jTextArea1.getText()+"\nUj jatekos csatlakozott!");
+        String temp = jTextArea1.getText();
+        jTextArea1.setText( temp + "\nUj jatekos csatlakozott!");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

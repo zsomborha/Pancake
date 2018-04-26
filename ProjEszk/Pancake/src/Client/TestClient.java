@@ -1,10 +1,13 @@
 package Client;
 
 import Client.Client;
+import GameLogic.GameLogic;
 import GameLogic.Player;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TestClient {
     
@@ -18,9 +21,14 @@ public class TestClient {
         Scanner scIN = new Scanner(System.in);    
         PORT = Integer.parseInt(scIN.nextLine() );
         String name = scIN.nextLine();
+        GameLogic gl;
+        try {
+            gl = new GameLogic();
+            c=new Client(PORT, IP, name, gl);
+        } catch (Exception ex) {
+            Logger.getLogger(TestClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        c=new Client(PORT, IP, name);
-       
     }
     
     public static void statusZero(){

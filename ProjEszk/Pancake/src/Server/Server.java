@@ -42,6 +42,7 @@ public class Server {
         
         start.start();
         
+        
         try {
             start.join();
         } catch (InterruptedException ex) {

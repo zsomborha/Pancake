@@ -144,7 +144,12 @@ public class Modell {
     }
 
     public void newPlayer() {
-        waiting.newPlayer();
+        try{
+            Thread.sleep(250);
+            waiting.newPlayer();
+        }catch(Exception ex){
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

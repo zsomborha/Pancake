@@ -27,16 +27,13 @@ public class GameLogic {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    static Modell modell;
+    Modell modell;
     Client client;
     
     public static void main(String[] args) throws Exception{ GameLogic g = new GameLogic();}
     
     public GameLogic() throws Exception{
         modell = new Modell(this);
-
-        
-
     }
     
 
@@ -47,30 +44,31 @@ public class GameLogic {
     
 
     
-    public static void statusZero(){
+    public void statusZero(){
         //itt csatalozik uj jatekos
         modell.newPlayer();
     }
     
-        public static void statusOne(){
+    public void statusOne(){
         try {
             modell.GamePanelCreate(10);
         } catch (SQLException ex) {
             Logger.getLogger(GameLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-         public static void statusTwo(){    
+    
+    public void statusTwo(){    
             //end of question
-            modell.endOfQuestion();
-        }
+        modell.endOfQuestion();
+    }
 
-        public static void statusThree(){    
+    public void statusThree(){    
             //end of question
             
-        }
+    }
     
     public void startCommunication(String playerName, String ip, String port) {
-        client = new Client(Integer.parseInt(port), ip, playerName);
+        client = new Client(Integer.parseInt(port), ip, playerName,this);
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

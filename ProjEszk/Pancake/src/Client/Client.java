@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Client {
     public ArrayList<Player> players = new ArrayList<>();
@@ -14,16 +16,18 @@ public class Client {
     private PrintWriter pw;
     private String msg = "";
     private Scanner scIn;
+    private GameLogic.GameLogic gl;
     private int status = 0; //0-lobby 1-kérdés 2-kérdés vége 3-játék vége
     private int questionID;
     private int selectedAnswer = 4; //4-if not selected anything
     
-    public Client(int PORT, String IP, String name){
+    public Client(int PORT, String IP, String name,GameLogic.GameLogic gl){
         try {
             s        = new Socket(IP, PORT);
             sc      = new Scanner(s.getInputStream(), "utf-8");
             pw  = new PrintWriter(s.getOutputStream());
             scIn    = new Scanner(System.in);
+            this.gl= gl;
             
             try{ 
                 pw.println(name);
@@ -70,21 +74,23 @@ public class Client {
                         if(sc.hasNextLine()){
                             incomingMSG = sc.nextLine();
                         }
-                            
+                        //System.out.println(incomingMSG);
                         if(!incomingMSG.equals("")){
                             if(incomingMSG.charAt(0) == 'N'){ //new Client
+                                
                                 String playersString = sc.nextLine();
                                 
                                 playersToArray(playersString);
                                 
-                                GameLogic.GameLogic.statusZero();//status 0
+                                gl.statusZero();//status 0
                                 //TestClient.statusZero();
                                 
                             }else
                             if(incomingMSG.charAt(0) == 'S'){ //Status change
                                 if(         incomingMSG.charAt(1) == '1'){//question ID  incoming
                                     this.status = 1;
-                                    GameLogic.GameLogic.statusOne();//status 1
+                                    
+                                    gl.statusOne();//status 1
                                     //TestClient.statusOne();
                                     
                                     int questionID = sc.nextInt();
@@ -93,7 +99,7 @@ public class Client {
                                     
                                 }else if(   incomingMSG.charAt(1) == '2'){//time is up, send answer
                                     this.status = 2;
-                                    GameLogic.GameLogic.statusTwo();//status 2
+                                    gl.statusTwo();//status 2
                                     //TestClient.statusTwo();
                                     
                                     pw.println(selectedAnswer);
@@ -107,7 +113,7 @@ public class Client {
                                     String playersString = sc.nextLine();
                                     playersToArray(playersString);
                                     
-                                    GameLogic.GameLogic.statusThree();//status 3
+                                    gl.statusThree();//status 3
                                     //TestClient.statusThree();
                                 }
                             }else{
@@ -118,7 +124,9 @@ public class Client {
                             //question ID
                         }catch(Exception e){
                             System.err.println("Error in client! : " + e.toString());
+                            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, e);
                     }
+
                 }
     }
         
