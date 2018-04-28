@@ -7,6 +7,7 @@ package GUI;
 
 import GameLogic.Player;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -29,6 +30,7 @@ public class Result extends javax.swing.JFrame {
 
     Result(String playerName,ArrayList<Player> p) {
         initComponents();
+        
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("frameIcon.png")));
         jLabel1.setText("Üdvözöljük "+playerName+"!");
         msgEgyVillogas();
@@ -79,10 +81,13 @@ public class Result extends javax.swing.JFrame {
         jLabel1.setBounds(370, 50, 490, 40);
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 153, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("jLabel2");
+        jLabel2.setMaximumSize(new java.awt.Dimension(10, 18));
+        jLabel2.setMinimumSize(new java.awt.Dimension(10, 10));
+        jLabel2.setPreferredSize(new java.awt.Dimension(10, 18));
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(760, 380, 360, 270);
+        jLabel2.setBounds(340, 310, 540, 60);
         getContentPane().add(jLabel3);
         jLabel3.setBounds(420, 370, 0, 0);
 
@@ -156,7 +161,8 @@ public class Result extends javax.swing.JFrame {
         Player winner = p.get(0);
         
        // Player winner = modell.getWinner();
-        jLabel2.setText("A kor gyoztese: "+winner.GetName()+" "+winner.GetPoints()+" ponttal! Gratulalunk!");
+        jLabel2.setFont(new Font("Courier", Font.BOLD, 25));
+        jLabel2.setText("A kör gyoztese: "+winner.GetName()+" "+winner.GetPoints()+" ponttal! Gratulalunk!");
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

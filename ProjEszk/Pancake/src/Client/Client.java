@@ -90,12 +90,13 @@ public class Client {
                                 if(         incomingMSG.charAt(1) == '1'){//question ID  incoming
                                     this.status = 1;
                                     
-                                    gl.statusOne();//status 1
-                                    //TestClient.statusOne();
+                                   
                                     
-                                    int questionID = sc.nextInt();
+                                    int questionID = Integer.parseInt(sc.nextLine());
                                     //TODO getQuestion(questionID)
                                     this.questionID = questionID;
+                                    gl.statusOne();//status 1
+                                    //TestClient.statusOne();
                                     
                                 }else if(   incomingMSG.charAt(1) == '2'){//time is up, send answer
                                     this.status = 2;

@@ -33,6 +33,7 @@ public class GameLogic {
     static Server server;
     boolean first = true;
     ArrayList<Player> playersResults;
+    List<Question> questions = DataSource.getInstance().getQuestionController().getEntities();
     
     public static void main(String[] args) throws Exception{ GameLogic g = new GameLogic();}
     
@@ -62,7 +63,8 @@ public class GameLogic {
               modell.refreshQuestion();
           }
           
-            
+          
+  
         } catch (Exception ex) {
             Logger.getLogger(GameLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,9 +94,10 @@ public class GameLogic {
 
     public String[] getQuestion() throws SQLException {
 
-        
         int index = client.getQuestionID();
-        Question myQuestion = DataSource.getInstance().getQuestionController().getEntities().get(index);        
+        System.out.println("Question = " + index);
+        Question myQuestion = questions.get(index);    
+        
         List<String> answers = myQuestion.getAnswers();
         String[] questionWithAnswers = {myQuestion.getQuestionString(), answers.get(0), answers.get(1), answers.get(2), answers.get(3)};
         return questionWithAnswers;
@@ -109,7 +112,8 @@ public class GameLogic {
         System.out.println("meret"+client.getPlayers().size());
         return client.getPlayers();
     }
-
+    
+    /*
     public void startSzerver(int parseInt) {
         
         Thread s = new Thread(  ()-> {
@@ -119,6 +123,6 @@ public class GameLogic {
         
         s.start();
     }
-        
+    */      
     
 }

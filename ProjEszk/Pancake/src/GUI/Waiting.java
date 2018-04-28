@@ -50,17 +50,18 @@ public class Waiting extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Várakozás...");
         setResizable(false);
         getContentPane().setLayout(null);
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(670, 430, 177, 135);
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -68,8 +69,6 @@ public class Waiting extends javax.swing.JFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabel1);
         jLabel1.setBounds(280, 100, 600, 100);
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(670, 430, 177, 135);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -78,26 +77,12 @@ public class Waiting extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(380, 250, 390, 140);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(690, 410, 73, 23);
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 1131, 707);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        modell.startGame();
-    }//GEN-LAST:event_jButton1ActionPerformed
     
     public void setModell(Modell modell){
         this.modell = modell;
@@ -138,7 +123,6 @@ public class Waiting extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -147,9 +131,7 @@ public class Waiting extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void newPlayer() {
-        //jLabel4.setText(jLabel4.getText().toString()+" "+"Uj jatekos csatlakozott!");
-        String temp = jTextArea1.getText();
-        jTextArea1.setText( temp + "\nUj jatekos csatlakozott!");
+        jTextArea1.setText(modell.getPlayers());
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

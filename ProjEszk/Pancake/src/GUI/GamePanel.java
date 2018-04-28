@@ -9,7 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -26,6 +27,7 @@ public class GamePanel extends javax.swing.JFrame {
         initComponents();
         
         this.modell = modell;
+        
         // String kerdes = client.getNewQuestion();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("frameIcon.png")));
     
@@ -36,17 +38,15 @@ public class GamePanel extends javax.swing.JFrame {
         jLabel3.setText("Üdvözöljük "+playerName+"!");
         jLabel1.setText("A kérdés sorszáma: 1/"+Integer.toString(round));
         jLabel2.setText(kerdes);
-        Font font = new Font("Courier", Font.BOLD, 23);
+        Font font = new Font("Courier", Font.BOLD, 25);
         Font font2 = new Font("Courier", Font.BOLD, 27);
         jLabel2.setFont(font);
         jLabel3.setFont(font2);
         jLabel1.setFont(font);
         
+        addToButtonGroup();
         
-        jToggleButton1.setText(valasz1);
-        jToggleButton2.setText(valasz2);
-        jToggleButton3.setText(valasz3);
-        jToggleButton4.setText(valasz4);
+        setNewQuestion(kerdes, valasz1, valasz2, valasz3, valasz4);
         
         jToggleButton1.setBackground(Color.decode("#8CF9B7"));
         jToggleButton2.setBackground(Color.decode("#8CF9B7"));
@@ -66,6 +66,7 @@ public class GamePanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
@@ -73,7 +74,6 @@ public class GamePanel extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
@@ -130,15 +130,6 @@ public class GamePanel extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(300, 30, 520, 70);
 
-        jButton1.setText("Játékleírás");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(1031, 670, 90, 25);
-
         jButton2.setText("Játékleírás");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +137,7 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(340, 630, 150, 25);
+        jButton2.setBounds(340, 630, 150, 23);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel5);
@@ -155,31 +146,51 @@ public class GamePanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addToButtonGroup(){
+        buttonGroup1.add(jToggleButton1);
+        buttonGroup1.add(jToggleButton2);
+        buttonGroup1.add(jToggleButton3);
+        buttonGroup1.add(jToggleButton4);
+    }
+    
+    private void disableButtons(){
+        jToggleButton1.setEnabled(false);
+        jToggleButton2.setEnabled(false);
+        jToggleButton3.setEnabled(false);
+        jToggleButton4.setEnabled(false);
+    }
+    
+    private void enableButtons(){
+        buttonGroup1.clearSelection();
+        jToggleButton1.setEnabled(true);
+        jToggleButton2.setEnabled(true);
+        jToggleButton3.setEnabled(true);
+        jToggleButton4.setEnabled(true);
+    }
+    
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        modell.seAnswer(jToggleButton1.getText());
-        
+        modell.setAnswer(jToggleButton1.getText());
+        disableButtons();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
-        modell.seAnswer(jToggleButton2.getText());
+        modell.setAnswer(jToggleButton2.getText());
+        disableButtons();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         // TODO add your handling code here:
-        modell.seAnswer(jToggleButton3.getText());
+        modell.setAnswer(jToggleButton3.getText());
+        disableButtons();
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
         // TODO add your handling code here:
-        modell.seAnswer(jToggleButton4.getText());
+        modell.setAnswer(jToggleButton4.getText());
+        disableButtons();
     }//GEN-LAST:event_jToggleButton4ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        modell.startGameDescrition();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -222,7 +233,7 @@ public class GamePanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -240,21 +251,23 @@ public class GamePanel extends javax.swing.JFrame {
     }
 
     void setNewQuestion(String string, String string0, String string1, String string2, String string3) {
+        
+        ArrayList<String> list = new ArrayList<String>();
+        list.add(string0); list.add(string1); list.add(string2); list.add(string3);
+        Collections.shuffle(list);
+        
         jLabel2.setText(string);
-        jToggleButton1.setText(string0);
-        jToggleButton2.setText(string1);
-        jToggleButton3.setText(string2);
-        jToggleButton4.setText(string3);
+        jToggleButton1.setText(list.get(0));
+        jToggleButton2.setText(list.get(1));
+        jToggleButton3.setText(list.get(2));
+        jToggleButton4.setText(list.get(3));
+        
+        enableButtons();
     }
     
     
     void setKerdesSorszam(int n,int round){
         jLabel1.setText("A kérdés sorszáma: "+Integer.toString(n)+"/"+Integer.toString(round));
-    }
-
-    void playEndMessage() {
-        JOptionPane.showMessageDialog(this, "A játék véget ért, lássuk az eredményeket!");
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

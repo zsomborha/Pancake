@@ -83,8 +83,7 @@ public class Modell {
         gamePanel = new GamePanel(this,round,playerName,question[0],question[1],question[2],question[3],question[4]);
         gamePanel.setSize(1130, 710);
         try {
-            Thread.sleep(200);
-            
+            Thread.sleep(100);
         } catch (InterruptedException ex) {
             Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,14 +92,8 @@ public class Modell {
     }
     
 
-    void seAnswer(String answer) {
-
-        gameLogic.sendAnswer(answer);
-        if (kerdesSorszam<round){
-        }else{
-           gamePanel.playEndMessage();
-        }
-        
+    void setAnswer(String answer) {
+        gameLogic.sendAnswer(answer);     
     }
     
 
@@ -117,17 +110,11 @@ public class Modell {
 
     public void newPlayer() {
         try{
-            Thread.sleep(250);
+            Thread.sleep(100);
             waiting.newPlayer();
         }catch(Exception ex){
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    void startNewSzerver(String toString) {
-        
-        ServerStarter.main(null);
-  
     }
 
     public void serverAddress(int port) {
@@ -144,6 +131,16 @@ public class Modell {
         }
         return results;
     }
+    
+    public String getPlayers() {
+        ArrayList<Player> list = gameLogic.getResult();
+        String[] players = new String[list.size()];
+        String result = "";
+        for(int i=0;i<list.size();i++){
+            result += list.get(i).GetName() + "\n";
+        }
+        return result;
+    }
 
     public void endOfQuestion(ArrayList<Player> p) {
         gamePanel.dispose();
@@ -155,7 +152,6 @@ public class Modell {
     void startGame() {
         try {
             GamePanelCreate(10);
-            
         } catch (Exception ex) {
             Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -167,8 +163,11 @@ public class Modell {
     public void refreshQuestion() {
         try {
             gamePanel.setKerdesSorszam(++kerdesSorszam,round);
+            
             String[] question = gameLogic.getQuestion();
+            
             gamePanel.setNewQuestion(question[0],question[1],question[2],question[3],question[4]);
+            
         } catch (SQLException ex) {
             Logger.getLogger(Modell.class.getName()).log(Level.SEVERE, null, ex);
         }

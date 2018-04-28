@@ -42,17 +42,15 @@ public class login extends javax.swing.JFrame{
         // * LABEL * //
         
         jLabel7.setText("Üdvözlünk a Pancake Quiz játékban!");
-        jLabel2.setText("Felhasználóneved: ");
-        jLabel4.setText("IP címed: ");
-        jLabel5.setText("PORT számod: ");
-        jLabel6.setText("Első lépésként indítsd el a szervert!");
+        jLabel2.setText("Felhasználónév: ");
+        jLabel4.setText("IP cím: ");
+        jLabel5.setText("PORT szám: ");
         
         Font font = new Font("Courier", Font.BOLD, 23);
         Font font2 = new Font("Courier", Font.BOLD, 27);
         jLabel2.setFont(font);
         jLabel4.setFont(font);
         jLabel5.setFont(font);
-        jLabel6.setFont(font);
         jLabel7.setFont(font2);
         
         
@@ -92,19 +90,14 @@ public class login extends javax.swing.JFrame{
         
         jButton1.setText("játékleírás");
         jButton2.setText("START");
-        jButton3.setText("START SZERVER");
         
         jButton2.setBackground(Color.decode("#F45959"));
-        jButton3.setBackground(Color.decode("#F45959"));
         
         jButton2.setForeground(Color.decode("#960505"));
-        jButton3.setForeground(Color.decode("#960505"));
         
         Font font3 = new Font("Courier", Font.BOLD, 20);
         Font font4 = new Font("Courier", Font.BOLD, 12);
         jButton2.setFont(font3);
-        jButton3.setFont(font4);
-        
         
         jTextField1.setText("asd");
         jTextField2.setText("localhost");
@@ -131,8 +124,6 @@ public class login extends javax.swing.JFrame{
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -144,7 +135,7 @@ public class login extends javax.swing.JFrame{
 
         jLabel1.setText("Üdvözlünk a Pancake Quiz játékban!");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(380, 750, 205, 16);
+        jLabel1.setBounds(380, 750, 174, 14);
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +144,7 @@ public class login extends javax.swing.JFrame{
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(12, 1002, 79, 25);
+        jButton1.setBounds(12, 1002, 73, 23);
 
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
@@ -198,19 +189,6 @@ public class login extends javax.swing.JFrame{
         getContentPane().add(jTextField2);
         jTextField2.setBounds(620, 170, 250, 30);
 
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed1(evt);
-            }
-        });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(30, 120, 150, 30);
-
-        jLabel6.setText("jLabel6");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(30, 70, 440, 40);
-
         jLabel7.setText("jLabel7");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(330, 20, 530, 50);
@@ -222,7 +200,7 @@ public class login extends javax.swing.JFrame{
             }
         });
         getContentPane().add(jButton4);
-        jButton4.setBounds(320, 640, 210, 25);
+        jButton4.setBounds(320, 640, 210, 23);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/frameBackground.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -244,11 +222,6 @@ public class login extends javax.swing.JFrame{
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jButton3ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed1
-        // TODO add your handling code here:
-        modell.startNewSzerver(jTextField3.getText().toString());
-    }//GEN-LAST:event_jButton3ActionPerformed1
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -300,14 +273,12 @@ public class login extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

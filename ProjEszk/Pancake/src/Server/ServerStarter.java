@@ -17,6 +17,8 @@ public class ServerStarter extends javax.swing.JFrame {
      * Creates new form ServerStarter
      */
     Server server;
+    int numberOfRounds = 10;
+    int timePerQuestion = 5;
     
     public ServerStarter() {
         initComponents();
@@ -122,7 +124,7 @@ public class ServerStarter extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                server = new Server(0,10,1);
+                server = new Server(0,numberOfRounds,timePerQuestion);
                 String IP = server.getIP();
                 jTextField1.setText(IP);
                 int PORT = server.getPORT();

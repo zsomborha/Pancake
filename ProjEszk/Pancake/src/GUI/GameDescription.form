@@ -23,11 +23,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="76" max="32767" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="436" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -39,7 +34,12 @@
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="259" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="436" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,9 +48,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="290" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
@@ -69,7 +69,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Ez egy quiz j&#xe1;t&#xe9;k...."/>
+            <Property name="text" type="java.lang.String" value="Ez egy quiz j&#xe1;t&#xe9;k, minden k&#xe9;rd&#xe9;sre n&#xe9;gy lehets&#xe9;ge k&#xe9;rd&#xe9;s van, amik k&#xf6;z&#xfc;l csak&#xa;egy a helyes.&#xa;&#xa;A j&#xe1;t&#xe9;k kezd&#xe9;s&#xe9;hez egy szervert kell ind&#xed;tani, amihez n&#xe9;gy j&#xe1;t&#xe9;kos csatlakozhat, &#xa;a j&#xe1;t&#xe9;kosok csatlakoz&#xe1;sa ut&#xe1;n a szerver panelen tal&#xe1;lhat&#xf3; StartGame gombbal &#xa;ind&#xed;that&#xf3; a j&#xe1;t&#xe9;k."/>
           </Properties>
         </Component>
       </SubComponents>

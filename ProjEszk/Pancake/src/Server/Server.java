@@ -23,11 +23,17 @@ public class Server {
     private boolean gameStart = false;
     private Thread joining;
     public ArrayList<User> players = new ArrayList<User>();
+    private List<Question> list;
     
     public Server(int PORT,int rounds, int tpq){
         this.PORT = PORT;
         this.rounds = rounds;
         this.timePerQuestion = tpq;
+        try {
+            this.list = DataSource.getInstance().getQuestionController().getEntities();
+        } catch (SQLException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             ss = new ServerSocket(PORT);
         } catch (IOException ex) {
@@ -94,7 +100,7 @@ public class Server {
     }
     
     private void game(int rounds) throws InterruptedException, SQLException{
-        List<Question> list = DataSource.getInstance().getQuestionController().getEntities();
+        
         
         for(int i = 0; i < rounds; ++i){
             
@@ -106,28 +112,33 @@ public class Server {
            }
             
             Random random = new Random();
-            int  n = random.nextInt(list.size() -1);
-            int questionID = list.get(n).getId().intValue();
+            int  n = random.nextInt( list.size() );
+            System.out.println("Question = " + n);
 
             for(User p : players){
-                System.out.println("Server send: " + questionID);
-                p.sendQuestion(questionID);
+                p.sendQuestion(n);
             }
+            
             ////////////////////////////
             Thread.sleep(timePerQuestion * 1000);
             ////////////////////////////
             
             //round end
             for(User p : players){
-                p.sendStatus(2);
-                System.out.println("Server send: " + "S2");
+                
                 try{
+                    p.sendStatus(2);
                     String answer = p.receiveAnswer();
-                    if(answer.equals( list.get(n).getCorrectAnswer() ) ) /*question.answer*/{
+                    System.out.println("Question = " + n);
+                    String correctAnswer = list.get(n).getCorrectAnswer();
+                    
+                    System.out.println(answer + " --- " + correctAnswer);
+                    if(answer.equals( correctAnswer ) ) /*question.answer*/{
                         p.addPoint();
                     }
+
                 }catch(NoSuchElementException e){
-                    
+                    System.err.println("Error at checking asnwers: " + e.toString());
                 }
                 Thread.sleep(1000);
             }   
