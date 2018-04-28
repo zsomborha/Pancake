@@ -33,11 +33,12 @@ public class GameLogic {
     static Server server;
     boolean first = true;
     ArrayList<Player> playersResults;
-    List<Question> questions = DataSource.getInstance().getQuestionController().getEntities();
+    TestGUI testGui;
+    boolean test = false;
     
-    public static void main(String[] args) throws Exception{ GameLogic g = new GameLogic();}
     
-    public GameLogic() throws Exception{
+    public GameLogic(boolean test) throws Exception{
+        this.test=test;
         modell = new Modell(this);
     }
     
@@ -63,8 +64,7 @@ public class GameLogic {
               modell.refreshQuestion();
           }
           
-          
-  
+            
         } catch (Exception ex) {
             Logger.getLogger(GameLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,17 +75,30 @@ public class GameLogic {
     }
 
     public void statusThree(){
-           playersResults = client.getPlayers();
+        if(!test){
+            playersResults = client.getPlayers();
+        }else{
+            playersResults = testGui.getPlayers();
+        }
+           
            modell.endOfQuestion(playersResults);
     }
     
     public void startCommunication(String playerName, String ip, String port) {
-        
-        Thread c = new Thread( ()-> {
+        if (!test){
+            Thread c = new Thread( ()-> {
             client = new Client(Integer.parseInt(port), ip, playerName,this);
+            
         });
-        
-        c.start();
+            c.start();
+        }else{
+            Thread c = new Thread( ()-> {
+            testGui = new TestGUI(Integer.parseInt(port), ip, playerName,this);
+            
+        });
+            c.start();
+        }
+            
     }
     
   
@@ -94,26 +107,40 @@ public class GameLogic {
 
     public String[] getQuestion() throws SQLException {
 
-        int index = client.getQuestionID();
-        System.out.println("Question = " + index);
-        Question myQuestion = questions.get(index);    
+        int index;
+        if (!test){
+            index = client.getQuestionID();
+        }else{
+            index = testGui.getQuestionID();
+        }
         
+        Question myQuestion = DataSource.getInstance().getQuestionController().getEntities().get(index);        
         List<String> answers = myQuestion.getAnswers();
         String[] questionWithAnswers = {myQuestion.getQuestionString(), answers.get(0), answers.get(1), answers.get(2), answers.get(3)};
         return questionWithAnswers;
     }
 
     public void sendAnswer(String answer) {
-          client.setSelectedAnswer(answer);    
+        if(!test){
+           client.setSelectedAnswer(answer);  
+        }else{
+            testGui.setSelectedAnswer(answer);
+        }
+             
     }
     
 
     public ArrayList getResult() {
-        System.out.println("meret"+client.getPlayers().size());
-        return client.getPlayers();
+        ArrayList<Player> p;
+        if(!test){
+                System.out.println("meret"+client.getPlayers().size());
+                return client.getPlayers();
+        } else{
+                return TestGUI.getPlayers();
+        }
+
     }
-    
-    /*
+
     public void startSzerver(int parseInt) {
         
         Thread s = new Thread(  ()-> {
@@ -123,6 +150,10 @@ public class GameLogic {
         
         s.start();
     }
-    */      
+
+    private void setSelectedAnswer(String answer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+        
     
 }

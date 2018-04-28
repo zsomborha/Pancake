@@ -23,7 +23,7 @@ public class TestClient {
         String name = scIN.nextLine();
         GameLogic gl;
         try {
-            gl = new GameLogic();
+            gl = new GameLogic(false);
             c=new Client(PORT, IP, name, gl);
         } catch (Exception ex) {
             Logger.getLogger(TestClient.class.getName()).log(Level.SEVERE, null, ex);

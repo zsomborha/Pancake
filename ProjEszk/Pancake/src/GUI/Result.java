@@ -159,7 +159,11 @@ public class Result extends javax.swing.JFrame {
 
     void setWinner(ArrayList<Player> p) {
         Player winner = p.get(0);
-        
+        for(int i=0;i<p.size();i++){
+            if(p.get(i).GetPoints()>winner.GetPoints()){
+                winner = p.get(i);
+            }
+        }
        // Player winner = modell.getWinner();
         jLabel2.setFont(new Font("Courier", Font.BOLD, 25));
         jLabel2.setText("A kör gyoztese: "+winner.GetName()+" "+winner.GetPoints()+" ponttal! Gratulalunk!");
