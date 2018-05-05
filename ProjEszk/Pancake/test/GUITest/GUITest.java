@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
 package GUITest;
 
 import GUI.Modell;
@@ -10,10 +11,13 @@ import GameLogic.GameLogic;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
+*/
 /**
  *
  * @author Arianna
  */
+
+/*
 public class GUITest {
     
     @Test(expected = NullPointerException.class)
@@ -35,4 +39,4 @@ public class GUITest {
     }
     */
     
-}
+//}

@@ -5,12 +5,13 @@
         <group>
             <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GameLogic/GameLogic.java</file>
             <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/login.java</file>
-            <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/Result.java</file>
-            <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/GamePanel.java</file>
-            <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/Client/Client.java</file>
             <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/pancake/Pancake.java</file>
             <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/Modell.java</file>
+            <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/Client/Client.java</file>
+            <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/test/GUITest/GUITest.java</file>
+            <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/GamePanel.java</file>
             <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/Server/Server.java</file>
+            <file>file:/C:/Users/kubis/Documents/GitHub/Pancake/ProjEszk/Pancake/src/GUI/Result.java</file>
         </group>
     </open-files>
 </project-private>
