@@ -33,13 +33,12 @@
                       <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="436" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="259" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="436" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <EmptySpace pref="75" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,9 +47,9 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="290" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
@@ -69,7 +68,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Ez egy quiz j&#xe1;t&#xe9;k, minden k&#xe9;rd&#xe9;sre n&#xe9;gy lehets&#xe9;ge k&#xe9;rd&#xe9;s van, amik k&#xf6;z&#xfc;l csak&#xa;egy a helyes.&#xa;&#xa;A j&#xe1;t&#xe9;k kezd&#xe9;s&#xe9;hez egy szervert kell ind&#xed;tani, amihez n&#xe9;gy j&#xe1;t&#xe9;kos csatlakozhat, &#xa;a j&#xe1;t&#xe9;kosok csatlakoz&#xe1;sa ut&#xe1;n a szerver panelen tal&#xe1;lhat&#xf3; StartGame gombbal &#xa;ind&#xed;that&#xf3; a j&#xe1;t&#xe9;k."/>
+            <Property name="text" type="java.lang.String" value="Ez egy quiz j&#xe1;t&#xe9;k. Maximum 4 f&#x151; j&#xe1;tszhat egyszerre. 10 k&#xe9;rd&#xe9;s fog megjelenni, &#xa;melyekre id&#x151;ben kell v&#xe1;laszolni, k&#xfc;l&#xf6;nben elt&#x171;nik a jelenlegi k&#xe9;rd&#xe9;s, &#xe9;s a &#xa;k&#xf6;vetkez&#x151;re ugrik. Egy k&#xe9;rd&#xe9;s egy pont. Az nyer, aki a legt&#xf6;bb pontot gy&#x171;jti &#xf6;ssze.&#xa;A f&#x151;nyerem&#xe9;ny egy palacsinta, melyet h&#xe1;zhoz sz&#xe1;ll&#xed;tunk."/>
           </Properties>
         </Component>
       </SubComponents>

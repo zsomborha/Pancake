@@ -1,3 +1,10 @@
 
 *.class
 *.class
+/ProjEszk/Pancake_server/nbproject/private/
+/ProjEszk/Pancake_database/nbproject/private/
+/ProjEszk/Pancake_server/build/
+/ProjEszk/Pancake_database/build/
+/ProjEszk/Pancake_database/dist/
+/ProjEszk/Pancake/dist/
+/ProjEszk/Pancake_server/dist/
