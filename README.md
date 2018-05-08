@@ -2,6 +2,8 @@
 
 Pancake is a multiplayer. trivia quiz game. You can compete with up to 4 players, the one who collects most points wins. 
 
+Build server: http://89.134.9.5:8080
+
 ## Database setup
 
 Download a GlassFish application:
