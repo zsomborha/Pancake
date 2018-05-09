@@ -231,10 +231,6 @@ public class login extends javax.swing.JFrame{
         // TODO add your handling code here:
         modell.startGameDescrition();
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     
     Modell modell;
     
