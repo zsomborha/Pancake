@@ -6,16 +6,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import Database.Controllers.QuestionController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DataSource {
     
-    private final String connectionUrl = "jdbc:derby://localhost:1527/Pancake";
+    private final String connectionUrl = "jdbc:sqlite:Pancake.db";
     private final String userName = "root";
     private final String password = "root";
     
     private final QuestionController questionController;
     
     private DataSource(){
+        try {
+            loadDbDriver("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection(connectionUrl, userName, password);
+        } catch (Exception ex) {
+            Logger.getLogger(DataSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.questionController = new QuestionController();
     }
     
@@ -48,6 +56,15 @@ public class DataSource {
     public QuestionController getQuestionController() {
         return questionController;
     }
+    
+    private static void loadDbDriver(String driverClassName) throws Exception {
+		try {
+			Class.forName(driverClassName);
+		} catch (Exception e) {
+			System.err.println("ERROR: failed to load JDBC driver.");
+			throw e;
+		}
+	}
 
 
     

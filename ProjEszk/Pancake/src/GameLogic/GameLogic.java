@@ -7,6 +7,7 @@ package GameLogic;
 
 import Client.Client;
 import Database.DataSource;
+import Database.DatabaseSetup;
 import Database.Entities.Question;
 import GUI.Modell;
 import Server.Server;
@@ -114,7 +115,24 @@ public class GameLogic {
             index = testGui.getQuestionID();
         }
         
-        Question myQuestion = DataSource.getInstance().getQuestionController().getEntities().get(index);        
+          
+        Question myQuestion = null;
+        boolean success = true;
+        try {
+            myQuestion = DataSource.getInstance().getQuestionController().getEntities().get(index);
+        } catch (SQLException ex) {
+            System.err.println("Erro at database, no database yet?");
+            success = false;
+        }
+        if(!success){
+            try {
+                DatabaseSetup.main(new String[0]);
+                myQuestion = DataSource.getInstance().getQuestionController().getEntities().get(index);
+            } catch (SQLException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         List<String> answers = myQuestion.getAnswers();
         String[] questionWithAnswers = {myQuestion.getQuestionString(), answers.get(0), answers.get(1), answers.get(2), answers.get(3)};
         return questionWithAnswers;
