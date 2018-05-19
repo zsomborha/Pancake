@@ -1,0 +1,33 @@
+ <project default="all">
+ 
+	<property name="doc.dir" location="doc"/>
+ 
+	 <target name="clean">
+		<subant target="clean">
+			<filelist dir="." files="Pancake_database/build.xml,Pancake_server/build.xml,Pancake/build.xml"/>
+		</subant>
+		<delete dir="${doc.dir}" />
+	 </target>
+	 
+     <target name="build">
+		<subant>
+            <filelist dir="." files="Pancake_database/build.xml,Pancake_server/build.xml,Pancake/build.xml"/>
+			<target name="test"/>
+			<target name="jar"/>
+        </subant>
+     </target>
+	 
+	 <target name="doc" description="generate documentation">
+		<mkdir dir="${doc.dir}" />
+    <javadoc destdir="${doc.dir}">
+        <fileset dir=".">
+			<include name="**/src/**/*.java"/>
+			<exclude name="**/*Test*"/>
+		</fileset>
+    </javadoc>
+	</target>
+	
+	
+	<target name="all" depends="clean,build,doc">
+	</target>
+</project>
