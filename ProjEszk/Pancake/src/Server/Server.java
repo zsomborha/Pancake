@@ -29,17 +29,11 @@ public class Server {
         this.PORT = PORT;
         this.rounds = rounds;
         this.timePerQuestion = tpq;
-        
         try {
             this.list = DataSource.getInstance().getQuestionController().getEntities();
         } catch (SQLException ex) {
-            try{
-                Database.DatabaseSetup.main(null);
-            }catch(Exception e){
-                System.err.println("Error at connecting to database! " + e.toString() );
-            }
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         try {
             ss = new ServerSocket(PORT);
         } catch (IOException ex) {

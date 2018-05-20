@@ -26,6 +26,10 @@ public class GameLogic {
 
 
     public static void startGame() {
+        if (server==null){
+            throw new NullPointerException("No server!");
+        }
+        
         server.startGame();
     }
     
@@ -52,6 +56,7 @@ public class GameLogic {
 
     
     public void statusZero(){
+        if(modell==null) return;
         //itt csatalozik uj jatekos
         modell.newPlayer();
     }
@@ -149,6 +154,9 @@ public class GameLogic {
     
 
     public ArrayList getResult() {
+        
+        if(client==null) return null;
+        
         ArrayList<Player> p;
         if(!test){
                 System.out.println("meret"+client.getPlayers().size());
@@ -160,7 +168,9 @@ public class GameLogic {
     }
 
     public void startSzerver(int parseInt) {
-        
+        if (server == null){
+            return;
+        }
         Thread s = new Thread(  ()-> {
             server = new Server(parseInt, 10,5);
             modell.serverAddress(server.getPORT());

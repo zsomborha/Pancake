@@ -109,6 +109,7 @@ public class Modell {
     }
 
     public void newPlayer() {
+        if (waiting==null) return;
         try{
             Thread.sleep(100);
             waiting.newPlayer();
