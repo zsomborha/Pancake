@@ -8,3 +8,11 @@
 /ProjEszk/Pancake_database/dist/
 /ProjEszk/Pancake/dist/
 /ProjEszk/Pancake_server/dist/
+*.form
+ProjEszk/Pancake/build/test/classes/.netbeans_update_resources
+ProjEszk/Pancake/build/test/classes/.netbeans_automatic_build
+ProjEszk/Pancake/build/classes/.netbeans_update_resources
+ProjEszk/Pancake/build/classes/.netbeans_automatic_build
+*.properties
+ProjEszk/Pancake/build/built-jar.properties
+ProjEszk/Pancake/build/built-jar.properties
