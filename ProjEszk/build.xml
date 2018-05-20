@@ -22,14 +22,14 @@
  
 	 <target name="clean">
 		<subant target="clean">
-			<filelist dir="." files="Pancake_database/build.xml,Pancake_server/build.xml,Pancake/build.xml"/>
+			<filelist dir="." files="Pancake/build.xml"/>
 		</subant>
 		<delete dir="${doc.dir}" />
 	 </target>
 	 
      <target name="build">
 		<subant>
-            <filelist dir="." files="Pancake_database/build.xml,Pancake_server/build.xml,Pancake/build.xml"/>
+            <filelist dir="." files="Pancake/build.xml"/>
 			<target name="test"/>
 			<target name="jar"/>
         </subant>
