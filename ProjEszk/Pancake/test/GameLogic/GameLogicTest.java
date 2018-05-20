@@ -7,6 +7,8 @@ package GameLogic;
 
 import GUI.Modell;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -172,13 +174,15 @@ public class GameLogicTest {
         
         
         System.out.println("getResult");
-        GameLogic instance = null;
-        ArrayList expResult = null;
+       
         try{
+            GameLogic instance = new GameLogic(false);
+            ArrayList expResult = null;
             ArrayList result = instance.getResult();
         }catch(NullPointerException e){
-            System.err.println("Error: no client!");
-            
+            System.out.println("Error: no client!");
+        } catch (Exception ex) {
+            Logger.getLogger(GameLogicTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -198,13 +202,18 @@ public class GameLogicTest {
     /**
      * Test of startGame method, of class GameLogic.
      */
+    
     @Test
     public void testStartGame() {
         System.out.println("startGame");
         try{
             GameLogic.startGame();
         }catch (NullPointerException e){
-            System.err.println("NPTREXCP");
+            if(e.getMessage().equals("No server!")){
+                System.out.println("Passed");
+            }else{
+                System.err.println("Error");
+            }
         }
         
     }
