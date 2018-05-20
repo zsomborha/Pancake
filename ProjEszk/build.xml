@@ -16,7 +16,7 @@
 				<exclude name="**/*Test*"/>
 			</fileset>
 			<formatter type="plain" />
-			<formatter type="plain" toFile="checkstyle_errors.txt" />
+			<formatter type="xml" toFile="checkstyle-result.xml" />
 		</checkstyle>
 	 </target>
  
