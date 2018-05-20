@@ -11,8 +11,10 @@ public class Pancake_server {
 
         URL[] urls = ((URLClassLoader)cl).getURLs();
 
+        System.out.println("Dependencies: ");
+        
         for(URL url: urls){
-        	System.out.println(url.getFile());
+        	System.out.println("Dependency= " + url.getFile());
         }
         
         
