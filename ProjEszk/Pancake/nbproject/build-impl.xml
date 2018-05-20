@@ -91,9 +91,7 @@ is divided into following sections:
             <and>
                 <isset property="do.archive"/>
                 <isset property="libs.CopyLibs.classpath"/>
-                <not>
-                    <istrue value="${mkdist.disabled}"/>
-                </not>
+                
             </and>
         </condition>
         <condition property="do.archive+manifest.available">
