@@ -17,8 +17,8 @@ public class DatabaseTest {
                 System.out.println(entity.getQuestionString());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DatabaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            System.out.println(ex.getMessage()); 
+       }
     }
     
 }
