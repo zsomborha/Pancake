@@ -1,6 +1,24 @@
  <project default="all">
  
 	<property name="doc.dir" location="doc"/>
+	
+	<target name="init-checkstyle">
+		<path id="checkstyle.lib.path">
+            <fileset dir="source" includes="checkstyle-8.10-all.jar"/>
+		</path>
+		<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties" classpathref="checkstyle.lib.path"/>
+	</target>
+
+	<target name="checkstyle" depends="init-checkstyle">
+		<checkstyle config="source/sun_checks.xml" failonviolation="false" >
+			<fileset dir=".">
+				<include name="**/src/**/*.java"/>
+				<exclude name="**/*Test*"/>
+			</fileset>
+			<formatter type="plain" />
+			<formatter type="plain" toFile="checkstyle_errors.txt" />
+		</checkstyle>
+	 </target>
  
 	 <target name="clean">
 		<subant target="clean">
@@ -28,6 +46,6 @@
 	</target>
 	
 	
-	<target name="all" depends="clean,build,doc">
+	<target name="all" depends="checkstyle,clean,build,doc">
 	</target>
 </project>
