@@ -1,2 +1,2 @@
-java -jar Pancake.jar d
+java -jar PancakeAllInOne.jar d
 exit

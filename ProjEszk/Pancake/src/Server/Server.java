@@ -1,6 +1,7 @@
 package Server;
 
 import Database.DataSource;
+import Database.DatabaseSetup;
 import Database.Entities.Question;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -29,11 +30,24 @@ public class Server {
         this.PORT = PORT;
         this.rounds = rounds;
         this.timePerQuestion = tpq;
+        
+        boolean success = true;
         try {
             this.list = DataSource.getInstance().getQuestionController().getEntities();
         } catch (SQLException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro at database, no database yet?");
+            success = false;
         }
+        if(!success){
+            try {
+                DatabaseSetup.main(new String[0]);
+                this.list = DataSource.getInstance().getQuestionController().getEntities();
+            } catch (SQLException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
         try {
             ss = new ServerSocket(PORT);
         } catch (IOException ex) {
